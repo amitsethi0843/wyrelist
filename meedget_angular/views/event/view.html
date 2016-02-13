@@ -1,0 +1,142 @@
+<div class="row" style="margin-top: 1%">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="titleHeadingSearch" ng-bind="data.event.title"></h1>
+                <span class="help-block helpBlockText" ng-bind="data.event.description"></span>
+            </div>
+
+            <div class="col-md-5">
+                <div class="panel panel-success">
+                    <div class="panel-heading mainBackgroundColor">
+                        <h3 class="panel-title listFriendHeading">Friends</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <div ng-show="!data.event.friends.length"
+                             class="alert alert-warning">No friends are added to your event. Add some friends now to
+                            your event.
+                            <a href="events.html#/edit/{{data.event.eventId}}"
+                               class="btn btn-primary btn-raised btn-block">Add Now</a></div>
+                        <div ng-repeat="friend in data.event.friends">
+                            <span ng-bind="$index+1" class="listItemFriends"></span>.
+                            <span ng-bind="friend.name" class="listItemFriends"></span>
+                            <span ng-bind="friend.amount | currency:'&#8377;'" class="pull-right badge"
+                                  ng-class="{badgeDanger: friend.amount < 0,badgeSuccess:friend.amount >= 0}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3 pull-right">
+                <div class="form-group label-floating">
+                    <label class="control-label" for="search">Search Items Here</label>
+                    <input class="form-control" id="search" name="search" type="search" ng-model="searchItem">
+                </div>
+            </div>
+        </div>
+
+        <div class="well bs-component">
+            <div ng-if="data.result == 'SUCCESS'">
+                <table class="table table-responsive table-hover" ng-hide="!data.event.items.length">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date Created</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Paid By</th>
+                        <th>Added By</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in data.event.items | filter:searchItem">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="item.dateCreated | date : 'MMM dd, yyyy @ hh:mma'"></td>
+                        <td ng-bind="(item.description | limitTo:35)+' ...'" data-toggle="tooltip"
+                            title="{{item.description}}" data-placement="bottom" data-container="body" tooltip></td>
+                        <td ng-bind="item.amount | currency:'&#8377;'"></td>
+                        <td ng-bind="item.paidBy"></td>
+                        <td ng-bind="item.addedBy"></td>
+                        <td>
+                            <a href="events.html#/item/edit/{{data.event.eventId}}/{{item.itemId}}"
+                               class="text-warning" data-toggle="tooltip"
+                               title="Edit Item Details" data-placement="bottom" tooltip><i
+                                    class="material-icons">mode_edit</i></a> |
+                            <a href="javascript:void(0)" ng-click="delete(item.itemId,$index)" class="text-danger"
+                               data-toggle="tooltip" title="Delete Item"
+                               data-placement="bottom" tooltip><i class="material-icons">delete</i></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="text-center">Total</th>
+                        <th ng-bind="data.event.totalExpenseAmount | currency:'&#8377;'" colspan="3"></th>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3 ng-show="!data.event.items.length" class="alert alert-info"><i
+                        class="material-icons">warning</i> There are no items available now. Please add some to get
+                    started.
+                </h3>
+            </div>
+
+            <div ng-if="data.result == 'ERROR'">
+                <div class="alert alert-danger">
+                    <p ng-bind="data.message"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center whoOwesWhoHeading">Who owes who and how much!</p>
+            </div>
+
+            <div class="col-md-6" ng-repeat="expense in data.event.expenses">
+                <div class="panel panel-success">
+                    <div class="panel-heading mainBackgroundColor">
+                        <h3 class="panel-title panelWhoOwesWhoHeading">
+                            <span ng-bind="expense.title"></span>
+                            <span ng-bind="expense.totalExpense | currency:'&#8377;'"
+                                  class="badge pull-right"
+                                  ng-class="{badgeDanger: expense.totalExpense < 0,badgeSuccess:expense.totalExpense >= 0}"></span>
+                        </h3>
+                    </div>
+
+                    <div class="panel-body minMaxHeightExpensePanel">
+                        <ul class="list-group" ng-hide="!expense.details.length">
+                            <li class="list-group-item expenseDetailList" ng-repeat="detail in expense.details">
+                                <span ng-bind="detail.title1"></span>
+                                <span class="badge badge-default mainBackgroundColor"
+                                      ng-bind="detail.amount | currency:'&#8377;'"></span>
+                                <span ng-bind="detail.title2"></span>
+                            </li>
+                        </ul>
+                        <div ng-show="!expense.details.length">
+                            <p class="text-center text-danger">There's no data to show here. Please add some entries to
+                                your event to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+        <a href="events.html#/item/add/{{data.event.eventId}}"
+           class="btn btn-primary btn-fab"
+           data-toggle="tooltip" tooltip
+           title="Add New Event Item" data-placement="bottom"><i class="material-icons">add</i></a>
+
+        <div><br/></div>
+        <a href="javascript:void(0)" ng-click="markEventCompleted(data.event.eventId)"
+           class="btn btn-success btn-fab"
+           data-toggle="tooltip" tooltip
+           title="Mark This Event Completed" data-placement="bottom"><i class="material-icons">done_all</i></a>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="row" style="margin-top: 1%">
+    <h1 class="titleHeading">Create new event here...</h1>
+
+    <div class="col-md-offset-1 col-md-10">
+        <div class="well bs-component">
+            <form name="addEventForm" id="addEventForm">
+                <div class="form-group label-floating" show-errors>
+                    <label class="control-label" for="title">Title</label>
+                    <input class="form-control" id="title" name="title" type="text" ng-model="formData.title" required>
+
+                    <p class="help-block" ng-if="addEventForm.title.$error.required">Title field cannot be left
+                        blank.</p>
+                </div>
+
+                <div class="form-group label-floating">
+                    <label class="control-label" for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="4"
+                              ng-model="formData.description"></textarea>
+                </div>
+
+                <div class="form-group label-floating" show-errors>
+                    <label class="control-label" for="eventType">Event Type</label>
+                    <select name="eventType" id="eventType" ng-model="formData.type" class="form-control" required>
+                        <option style="display:none" value="">Select appropriate type of your event...</option>
+                        <option ng-repeat="type in eventTypes" value="{{type}}">{{type}}</option>
+                    </select>
+
+                    <p class="help-block" ng-if="addEventForm.eventType.$error.required">Event Type field cannot be left
+                        blank.</p>
+                </div>
+
+                <div class="form-group label-floating">
+                    <label class="control-label" for="newFriend">Add Friends</label>
+
+                    <div class="input-group">
+                        <input class="form-control" id="newFriend" name="newFriend" type="text" ng-model="modelObj"
+                               ui-autocomplete="myOption">
+                        <span class="input-group-addon">
+                            <button class="btn btn-info" ng-click="addFriend()">Add</button>
+                        </span>
+                    </div>
+                    <span class="help-block">Press Add button just right next to Add Friend field to add entered text as Friend to Event.</span>
+
+                    <div class="createEventAddedFriendBlock">Added Friends:
+                        <span class="badge badge-default friendTag" ng-repeat="friend in formData.friends">{{friend}} <a
+                                class="close" href="javascript:void(0)" ng-click="removeFriend($index)">×</a></span>
+                        <span class="badge badgeDanger" ng-show="!formData.friends.length">Haven't added anyone yet! Add your friend to your Event by searching and adding them using above field. </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="javascript:void(0)" ng-click="submitAddEventForm(addEventForm)"
+                               class="btn btn-raised btn-primary btn-block">Create</a>
+                        </div>
+
+                        <div class="col-md-6">
+                            <a href="javascript:void(0)" ng-click="resetAddEventForm()"
+                               class="btn btn-raised btn-default btn-block">Reset</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

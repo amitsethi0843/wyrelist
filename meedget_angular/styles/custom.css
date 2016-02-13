@@ -1,0 +1,120 @@
+.titleHeading {
+    font-size: 380%;
+    margin-bottom: 1%;
+    margin-left: 10%;
+}
+
+.titleHeadingSearch {
+    font-size: 300%;
+    margin-bottom: 1%;
+}
+
+.titleHeading1 {
+    font-size: 380%;
+    margin-bottom: 1%;
+    margin-left: 18%;
+}
+
+.helpBlockText {
+    margin-bottom: 1%;
+}
+
+@font-face {
+    font-family: "GocaLogotype";
+    src: url("../fonts/Goca_logotype_beta.ttf") /* TTF file for CSS3 browsers */
+}
+
+.navbarLogo {
+    font-family: GocaLogotype;
+    font-size: 300%;
+    margin-top: 3%;
+}
+
+.friendTag {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 13px;
+    background-color: dodgerblue;
+}
+
+.friendTag .close {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.createEventAddedFriendBlock {
+    margin-top: 2%;
+}
+
+.listItemFriends {
+    font-size: medium;
+    font-weight: 400;
+    margin-bottom: 2%;
+}
+
+.mainBackgroundColor {
+    background-color: #3f51b5 !important;
+}
+
+.listFriendHeading {
+    font-size: larger;
+    font-weight: 900;
+    text-align: center;
+}
+
+.whoOwesWhoHeading {
+    font-size: xx-large;
+    margin-top: 2%;
+}
+
+.panelWhoOwesWhoHeading {
+    font-weight: 900;
+    font-size: larger;
+}
+
+.panelWhoOwesWhoHeading span.badge {
+    font-size: medium;
+}
+
+.badgeDanger {
+    background-color: #d9534f !important;
+}
+
+.badgeSuccess {
+    background-color: #5cb85c !important;
+}
+
+.expenseDetailList {
+    margin-bottom: 2%;
+    font-size: medium;
+}
+
+.expenseDetailList span.badge {
+    float: none !important;
+}
+
+.landingQuote {
+    color: white !important;
+    margin-top: 3%;
+}
+
+.imgCenter {
+    display: block;
+    margin: 0 auto;
+}
+
+.minMaxHeightExpensePanel {
+    min-height: 200px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.btn-facebook {
+    background-color: #3B5998 !important;
+    color: #fefefe !important;
+}
+
+.btn-google {
+    background-color: #d34836 !important;
+    color: #fefefe !important;
+}

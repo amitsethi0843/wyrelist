@@ -1,0 +1,261 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block staticResources %}
+
+    <script src="{% static 'app/services/publicService.js' %}" type="text/javascript"></script>
+    <script src="{% static 'app/directives/public.js' %}" type="text/javascript"></script>
+    <script src="{% static 'app/controller/publicController.js' %}" type="text/javascript"></script>
+
+{% endblock staticResources %}
+{% block content %}
+
+    <div class="container" id="container">
+        <div class="row">
+            <div class="panel panel-smart-white col-md-10 col-md-offset-1">
+                <h2>Register Yourself</h2>
+
+                <div class="text-center col-md-6 col-md-offset-3" style="margin-bottom: 10px">
+                    <h4>Save your time by registering with your social account</h4>
+
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="row">
+                            {#                    <g:render template="/social/facebook/fbRegister"/>#}
+                        </div>
+
+                        <div class="row">
+                            <a class="btn btn-block btn-social btn-twitter" style="margin-top: 5px">
+                                <i class="fa fa-twitter"></i> Sign in with Twitter
+                            </a>
+                            <a class="btn btn-block btn-social btn-google-plus" style="margin-top: 5px">
+                                <i class="fa fa-google-plus"></i> Sign in with Google Plus
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-10 col-md-offset-1" ng-app="publicController" ng-controller="public">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="icon-user"></i>Registration Form</h6>
+                </div>
+
+                <div class="panel-body">
+                    <form name="form" action="{% url 'user_ops:user_register' %}" method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>First Name:</label>
+
+                                    <div class="input-group">
+                                <span ng-class="{'input-group-addon validationError':!user.fName,'input-group-addon validationSuccess':user.fName}"><i
+                                        ng-class="{'fa fa-check':user.fName,'fa fa-exclamation-circle':!user.fName}"></i>
+                                </span>
+                                        <input type="text" id="fName" ng-model="user.fName"
+                                               ng-init="user.fName='{{ form.fName.value|default_if_none:"" }}'"
+                                               name="fName"
+                                               class="form-control">
+                                    </div>
+
+                                    <div class="col-md-12 errorField">
+                                        {{ form.fName.errors }}
+                                        {#                                <g:rendererErrors bean="${userRegistrationCO}" field="fName"/>#}
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Last Name:</label>
+
+                                    <div class="input-group">
+                                <span ng-class="{'input-group-addon validationError':!user.lName,'input-group-addon validationSuccess':user.lName}"><i
+                                        ng-class="{'fa fa-check':user.lName,'fa fa-exclamation-circle':!user.lName}"></i>
+                                </span>
+                                        <input type="text" id="lName" ng-model="user.lName"
+                                               ng-init="user.lName='{{ form.lName.value|default_if_none:"" }}'"
+                                               name="lName"
+                                               class="form-control">
+                                    </div>
+
+                                    <div class="col-md-12 errorField">
+                                        {{ form.lName.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email:</label>
+
+                                    <div class="input-group">
+                                <span ng-class="{'input-group-addon validationError':!form.email.$valid,'input-group-addon validationSuccess':form.email.$valid}"><i
+                                        ng-class="{'fa fa-check':user.email,'fa fa-exclamation-circle':!user.email}"></i>
+                                </span>
+                                        <input type="email"
+                                               ng-model="user.email"
+                                               ng-init="user.email='{{ form.email.value|default_if_none:"" }}'"
+                                               id="usernameReg" required
+                                               name="email"
+                                               class="form-control">
+                                    </div>
+                                    {#                            <g:renderErrors bean="${userRegistrationCO}" field="fName"/>#}
+                                    <div class="col-md-12 errorField" id="emailError">
+                            <span ng-show="form.username.$error.email">
+                                Enter valid email
+                            </span>
+                                        {{ form.email.errors }}
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Area:</label>
+
+                                    <div class="input-group">
+                                <span class="input-group-addon"><i id="residence"
+                                                                   class="fa fa-building"></i></span>
+                                        <input google-maps ng-model="user.location" model="user.location"
+                                               city="user.city"
+                                               state="user.state"
+                                               ng-init="user.location='{{ form.location.value|default_if_none:"" }}'"
+                                               latitude="user.latitude" longitude="user.longitude"
+                                               name="area" class="form-control"/>
+                                        <input type="hidden"
+                                               ng-init="user.city='{{ form.city.value|default_if_none:"" }}'"
+                                               value="{{ user.city }}" name="city">
+                                        <input type="hidden"
+                                               ng-init="user.longitude='{{ form.longitude.value|default_if_none:"" }}'"
+                                               value="{{ user.longitude }}" name="longitude">
+                                        <input type="hidden"
+                                               ng-init="user.latitude='{{ form.latitude.value|default_if_none:"" }}'"
+                                               value="{{ user.latitude }}" name="latitude">
+                                        <input type="hidden"
+                                               ng-init="user.state='{{ form.state.value|default_if_none:"" }}'"
+                                               value="{{ user.state }}" name="state">
+
+                                        <div class="col-md-12 errorField" id="areaError">
+                                            {{ form.city.errors }}
+                                            {{ form.state.errors }}
+                                            {{ form.latitude.errors }}
+                                            {{ form.longitude.errors }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Password:</label>
+
+                                    <div class="input-group">
+                                <span ng-class="{'input-group-addon validationError':!user.password,'input-group-addon validationSuccess':user.password}">
+                                    <i ng-class="{'fa fa-check':user.password,'fa fa-exclamation-circle':!user.password}"></i>
+                                </span>
+                                        <input type="password" id="passwordReg" ng-model="user.password"
+                                               name="password" class="form-control pass">
+                                    </div>
+
+                                    <div class="col-md-12 errorField" id="passwordError">
+                                        {{ form.password.errors }}
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Confirm Password:</label>
+
+                                    <div class="input-group">
+                                <span ng-class="{'input-group-addon validationError':!user.confirmPassword  || user.password!=user.confirmPassword,
+                                'input-group-addon validationSuccess':user.confirmPassword && user.password == user.confirmPassword}">
+                                    <i ng-class="{'fa fa-check':user.confirmPassword && user.password==user.confirmPassword,
+                                    'fa fa-exclamation-circle':!user.confirmPassword || user.password != user.confirmPassword}"></i>
+                                </span>
+                                        <input type="password" id="confirmPassword" ng-model="user.confirmPassword"
+                                               name="confirmPassword" class="form-control pass">
+                                    </div>
+                                    <div class="col-md-12 errorField" id="cpasswordError">
+                                <span ng-show="user.password!=user.confirmPassword">
+                                    Passwords don't match
+                                </span>
+                                        {{ form.confirmPassword.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Date of Birth:</label>
+
+                                    <div class="input-group">
+                                <span class="input-group-addon"><i
+                                        class="fa fa-calendar"></i></span>
+                                        <input type="text" datepickr id="dateOfBirth" name="dateOfBirth"
+                                               class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Gender:</label>
+
+                                    <div class="input-group">
+                                <span class="input-group-addon"><i id="genderId"
+                                                                   ng-class="{'fa fa-male':user.gender=='MALE','fa fa-female':user.gender=='FEMALE'}"></i></span>
+                                        {% verbatim %}
+                                        <select id="gender" ng-init="user.gender='MALE'" name="gender"
+                                                ng-model="user.gender" class="form-control">
+                                            <option ng-repeat="(key,value) in genders"
+                                                    value="{{ key }}">{{ value }}</option>
+                                        </select>
+                                        {% endverbatim %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Profile Pic:</label>
+
+                                    <div class="uploader" id="uniform-report-screenshot">
+                                        <input type="file" name="profilePic" class="styled form-control"
+                                               id="report-screenshot">
+                                        <span class="filename"
+                                              style="-webkit-user-select: none;">No file selected</span>
+                                        <span class="action" style="-webkit-user-select: none;">Choose File</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Register:</label>
+
+                                    <div class="col-md-12">
+                                        <input type="submit" class="btn btn-success btn-lg" value="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

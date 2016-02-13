@@ -1,0 +1,3 @@
+
+class searchType():
+    FIXEDDEPOSIT="FIXEDDEPOSIT"
