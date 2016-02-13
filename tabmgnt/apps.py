@@ -30,20 +30,8 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             'include_html': True,
-        },
-        'gunicorn': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'verbose',
-            'filename': '/www/investmentBazar/gunicornInvest.errors',
-            'maxBytes': 1024 * 1024 * 100,  # 100 mb
         }
-    },
-    'loggers': {
-        'gunicorn.errors': {
-            'level': 'DEBUG',
-            'handlers': ['gunicorn'],
-            'propagate': True,
-        },
     }
+
+
 }
