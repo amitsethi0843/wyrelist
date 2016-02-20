@@ -6,8 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from rest_framework import generics
+from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 import logging
+from bootstrap import *
 
 log = logging.getLogger(__name__)
 
@@ -20,12 +22,12 @@ def registerUser(request):
             user = userService.createAppUser(form,request)
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            return redirect(reverse('public:landing'))
+            return redirect(reverse('ops:landing'))
         else:
             log.error("===========user registeration validation failed"+str(form.errors))
         return render(request, "signup/signUp.html", {"form": form})
     else:
-        return redirect(reverse('public:landing'))
+        return redirect(reverse('ops:landing'))
 
 
 def loginUser(request):
@@ -44,10 +46,19 @@ def loginUser(request):
                     return HttpResponseRedirect(current)
         return render(request, 'login/login.html', {'form': form, 'current': current})
     else:
-        return redirect(reverse('public:landing'))
+        return redirect(reverse('ops:landing'))
 
 
 def logoutUser(request):
     # this action is being used to logout user
     logout(request)
-    return redirect(reverse('public:landing'))
+    return redirect(reverse('ops:landing'))
+
+def bootStrap(request):
+    createGroupsAndPermissions()
+
+class About(TemplateView):
+    template_name = "general/about.html"
+
+class Landing(TemplateView):
+    template_name = "landing/landing.html"

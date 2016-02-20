@@ -10,10 +10,11 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'appUser',
     'operations',
-    'public',
     'rest_framework',
     'portfolioFile',
-    'contact'
+    'contact',
+    'resturant',
+    'subscription'
 
 )
 
