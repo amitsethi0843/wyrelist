@@ -14,7 +14,8 @@ INSTALLED_APPS = (
     'portfolioFile',
     'contact',
     'resturant',
-    'subscription'
+    'subscription',
+    'common'
 
 )
 
