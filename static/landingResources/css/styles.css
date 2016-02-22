@@ -443,6 +443,7 @@ input:focus {
 	position: relative;
 	line-height: 45px;
 	padding-top: 23px;
+	color: #9d9d9d!important;
 }
 .current a {
 	color: #e96656 !important;
