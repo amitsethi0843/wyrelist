@@ -20,5 +20,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('operations.urls', namespace='ops')),
     url(r'^subscribe/', include('subscription.urls', namespace='subscription')),
+    url(r'^restaurant/', include('resturant.urls', namespace='restaurant')),
+    url(r'^user/', include('appUser.urls', namespace='user')),
+
 
 ]

@@ -20,3 +20,8 @@ class ClientSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         print("fucl")
+
+class RegistrationSerializer(serializers.Serializer):
+    class Meta:
+        model = User
+

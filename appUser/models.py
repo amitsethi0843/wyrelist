@@ -2,22 +2,41 @@ from django.db import models
 from django.contrib.auth.models import User
 import portfolioFile.services as fileService
 import uuid
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from choices import *
 
 
-
-
-
-class AppUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class AppUser(User):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     gender = models.CharField(choices=Gender.genderChoices, default=Gender.NOTDISCLOSED, max_length=20)
     dateOfBirth = models.DateField(null=True)
     dateCreated = models.DateTimeField(auto_now_add=True)
     lastUpdated = models.DateTimeField(auto_now=True)
+    token=models.ForeignKey(Token,null=True,on_delete=models.CASCADE)
+    retypePassword=models.CharField(max_length=20,null=True)
+
+
+    @classmethod
+    def create(cls, userData):
+        try:
+           user= cls(
+                username=userData['username'],
+                email=userData['username'],
+                password=userData['password']
+            )
+           user.save()
+           token=Token.objects.create(user=user)
+           user.token=token
+           user.save()
+           return user
+        except Exception as e:
+            print(e)
+
+
 
     def __str__(self):
-        return self.user.first_name + ' ' + self.user.last_name
+        return self.first_name + ' ' + self.last_name
 
 
 class ProfileImage(models.Model):

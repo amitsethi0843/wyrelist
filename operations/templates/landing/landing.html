@@ -795,8 +795,8 @@
                     </h4>
 
                     <!-- IF MAIL SENDING UNSUCCESSFULL -->
-                    <h4 class="error pull-left white-text">
-                        E-mail must be valid and message must be longer than 1 character.
+                    <h4 class="error pull-left white-text" >
+                        E-mail must be valid .
                     </h4>
                     <button class="btn btn-info custom-button wow fadeInLeft animated" id="submit" data-wow-offset="30"
                             onclick="submitSubscriptionForm()" data-wow-duration="1.5s" data-wow-delay="0.15s"
@@ -816,6 +816,7 @@
                 url: '{% url 'subscription:create' %}',
                 success: function (data) {
                     $('body').scrollTop(0);
+                    console.log(JSON.stringify(data))
                     toastr.success('Thanks for subscribing to us');
                     $('#subscriptionForm').find("input[type=text],input[type=email], textarea").val("")
                 },

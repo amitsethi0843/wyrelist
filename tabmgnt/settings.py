@@ -15,6 +15,8 @@ import os
 from apps import *
 from database import *
 from rest import *
+from cors import *
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -36,6 +38,7 @@ ALLOWED_HOSTS = []
 
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
@@ -44,10 +47,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'tabmgnt.middleware.StatsMiddleware'
+    'tabmgnt.middleware.StatsMiddleware',
+
 )
 
 ROOT_URLCONF = 'tabmgnt.urls'
+
+
 
 TEMPLATES = [
     {
@@ -91,7 +97,6 @@ LOGIN_URL = "/user/login/"
 
 ADMINS = [('Amit', 'amitsethi0843@gmail.com')]
 
-
 USE_I18N = True
 
 USE_L10N = True
@@ -112,4 +117,3 @@ STATIC_ROOT = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-

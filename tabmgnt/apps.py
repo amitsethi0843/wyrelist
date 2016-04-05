@@ -15,7 +15,8 @@ INSTALLED_APPS = (
     'contact',
     'resturant',
     'subscription',
-    'common'
+    'common',
+    'corsheaders'
 
 )
 
