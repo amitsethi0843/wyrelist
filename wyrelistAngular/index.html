@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!--<head>-->
+<!---->
+<!--<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">-->
+<!--<meta content="" name="description">-->
+<!--<meta content="" name="author">-->
+<!---->
+================== BEGIN BASE CSS STYLE ==================
+<!-- -->
+================== END BASE CSS STYLE ==================
+<!---->
+================== BEGIN BASE JS ==================
+<!-- -->
+================== END BASE JS ==================
+<!--</head>-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wyrelist</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <base href="/">
+
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="app/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet">
+    <link href="app/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="app/assets/css/animate.min.css" rel="stylesheet">
+    <link href="app/assets/css/style.min.css" rel="stylesheet">
+    <link href="app/assets/css/style-responsive.min.css" rel="stylesheet">
+    <link href="app/assets/css/theme/default.css" rel="stylesheet" id="theme">
+    <!--<link href="https://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet">-->
+     <script src="app/assets/plugins/pace/pace.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('app/main').then(null, console.error.bind(console))
+    </script>
+</head>
+<body>
+
+<route>
+
+</route>
+<script src="app/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+<script src="app/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+<script src="app/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+<script src="app/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="app/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="app/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+
+<script src="app/assets/js/apps.min.js"></script>
+<script>
+    $(document).ready(function () {
+        App.init();
+    });
+</script>
+</body>
+</html>

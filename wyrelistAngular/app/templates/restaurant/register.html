@@ -1,0 +1,83 @@
+<ol class="breadcrumb pull-right">
+    <li><a href="javascript:;">Home</a></li>
+    <li><a href="javascript:;">Register</a></li>
+    <!--<li class="active">Form Elements</li>-->
+</ol>
+<h1 class="page-header">Register </h1>
+    <!--<small>header small text goes here...</small></h1>-->
+<div class="row">
+    <!-- begin col-6 -->
+    <div class="col-md-8 col-md-offset-2 ui-sortable">
+        <!-- begin panel -->
+
+        <!-- end panel -->
+        <div class="panel panel-inverse" data-sortable-id="form-stuff-3" data-init="true">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                </div>
+                <h4 class="panel-title">Full Screen</h4>
+            </div>
+            <div class="panel-body">
+                <form action="/" method="POST">
+                    <fieldset>
+                        <legend>Provide following details to register</legend>
+                        <div class="form-group col-md-6">
+                            <label for="restaurantName">Restaurant Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="restaurantName" id="restaurantName"
+                                   placeholder="Enter Restaurant Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" [(ngModel)]="username" class="form-control" id="email"
+                                   placeholder="Enter Email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="fName">First Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="firstName" id="fName"
+                                   placeholder="Enter Last Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="lName">Last Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="lastName" id="lName"
+                                   placeholder="Enter Last Name">
+                        </div>
+
+                        <!--<div class="form-group col-md-6">-->
+                            <!--<label for="role">Role</label>-->
+                            <!--<wyre-select [className]="'form-control'" [id]="'role'" [requiredModel]="role"-->
+                                         <!--(modelChanged)="role=$event"-->
+                                         <!--[items]="restaurantService.restaurantRole"></wyre-select>-->
+                        <!--</div>-->
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="password" [(ngModel)]="password" class="form-control" id="password"
+                                   placeholder="Enter Password">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="retypePassword">Retype Password</label>
+                            <input type="password" [(ngModel)]="retypePassword" class="form-control" id="retypePassword"
+                                   placeholder="Retype your password">
+                        </div>
+                        <!--<div class="col-md-12">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox"> Check me out-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-md-12 text-center">
+                            <button type="submit" (click)="registerUser()" class="btn btn btn-primary m-r-5">Registeer
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end col-6 -->
+    <!-- begin col-6 -->
+    <!-- end col-6 -->
+</div>
