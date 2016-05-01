@@ -18,7 +18,6 @@ def registerUser(request):
     if not request.user.is_authenticated():
         form = registerForm(request.POST or request.FILES or None)
         if form.is_valid():
-            print("=======================================1")
             user = userService.createAppUser(form,request)
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
@@ -32,10 +31,8 @@ def registerUser(request):
 
 def loginUser(request):
     if not request.user.is_authenticated():
-        current = request.GET.get('current') if request.GET.get('current') else request.POST.get('current')
-        print(current)
+        current = request.GET.get('next') if request.GET.get('next') else request.POST.get('next')
         form = loginForm(request.POST or None)
-
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -50,7 +47,6 @@ def loginUser(request):
 
 
 def logoutUser(request):
-    # this action is being used to logout user
     logout(request)
     return redirect(reverse('ops:landing'))
 

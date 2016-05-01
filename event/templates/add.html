@@ -1,0 +1,182 @@
+{% extends 'layouts/admin/main.html' %}
+{% load widget_tweaks %}
+
+{% block staticResources %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <style>
+        .marginStyle {
+            margin-top: 20px
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid" id="container-fluid" style="margin-top: 50px;padding-top: 30px">
+        {% include '_leftPanel.html' %}
+        <div class="col-md-9">
+            <form action="{% url 'superUser:event:add' %}" method="post">
+                <div class="row marginStyle">
+
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Contact Number
+                        </div>
+                        <div class="col-md-6">
+                            {{ contactForm.number|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Contact Type
+                        </div>
+                        <div class="col-md-6">
+                            {{ contactForm.type|attr:"class:form-control" }}
+                        </div>
+                        {{ form.description|attr:"class:form-control" }}
+                    </div>
+                </div>
+                <div class="row marginStyle">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            Location
+                        </div>
+                        <div class="col-md-9">
+                            {{ addressForm.location|attr:"class:form-control" }}
+                            <input type="hidden" name="latitude" value="{{ addressForm.latitude.value }}" id="latitude">
+                            <input type="hidden" name="longitude" id="longitude" value="{{ addressForm.longitude.value }}">
+                            <input type="hidden" name="city" id="city" value="{{ addressForm.city.value }}">
+                            <input type="hidden" name="state" id="state" value="{{ addressForm.state.value }}">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row marginStyle">
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Entry Type
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.entryType|attr:"class:form-control" }}
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Entry Chargeable
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.entryChargeable|attr:"class:form-control" }}
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Fees Per Entry
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.feesPerEntry|attr:"class:form-control" }}
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Date Of Event
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.dateOfEvent|attr:"class:form-control" }}
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Event Start Time
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.startingTime|attr:"class:form-control" }}
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6">
+                            Event End Time
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.endingTime|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    {#                    <div class="col-md-12">#}
+                    {#                        <div class="col-md-6">#}
+                    {#                            Entry Per Fees(Leave emtpy if free)#}
+                    {#                        </div>#}
+                    {#                        <div class="col-md-6">#}
+                    {#                            {{ eventRuleForm.feesPerEntry|attr:"class:form-control" }}#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                </div>
+                <div class="row marginStyle">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            Created By
+                        </div>
+                        <div class="col-md-9">
+                            {{ eventForm.createdBy|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            Event Description
+                        </div>
+                        <div class="col-md-9">
+                            {{ eventForm.description|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row marginStyle">
+                    <div class="col-md-9 col-md-offset-3 text-center">
+                        <input type="submit" class="btn btn-success btn-lg">
+                    </div>
+                </div>
+            </form>
+
+            <div class="col-md-12">
+                {{ eventRuleForm.errors }}
+                {{ eventForm.errors }}
+                {{ addressForm.errors }}
+                {{ contactForm.errors }}
+
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#id_dateOfEvent').datepicker({
+            format: 'mm/dd/yyyy',
+        });
+        $('#id_startingTime').timepicker({'timeFormat': 'H:i'});
+        $('#id_endingTime').timepicker({'timeFormat': 'H:i'});
+        var options = {componentRestrictions: {country: 'in'}};
+        var element = document.getElementById('id_location');
+        var autocomplete = new google.maps.places.Autocomplete(element, options);
+        var city, state, latitude, longitude
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+            var components = place.address_components;
+            for (var i in components) {
+                if (components[i].types[0] == "locality") {
+                    city = components[i].long_name;
+                }
+                else if (components[i].types[0] == "administrative_area_level_1") {
+                    state = components[i].long_name;
+                }
+            }
+            latitude = place.geometry.location.lat();
+            longitude = place.geometry.location.lng();
+            $('#latitude').val(latitude);
+            $('#longitude').val(longitude);
+            $('#city').val(city);
+            $('#state').val(state);
+
+        })
+    </script>
+{% endblock content %}

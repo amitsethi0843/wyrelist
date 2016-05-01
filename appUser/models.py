@@ -14,7 +14,6 @@ class AppUser(User):
     dateCreated = models.DateTimeField(auto_now_add=True)
     lastUpdated = models.DateTimeField(auto_now=True)
     token=models.ForeignKey(Token,null=True,on_delete=models.CASCADE)
-    retypePassword=models.CharField(max_length=20,null=True)
 
 
     @classmethod
@@ -32,7 +31,6 @@ class AppUser(User):
            return user
         except Exception as e:
             print(e)
-
 
 
     def __str__(self):

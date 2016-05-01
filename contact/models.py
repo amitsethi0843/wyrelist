@@ -4,18 +4,21 @@ from resturant.models import Restaurant
 
 
 class Address(models.Model):
-    location = models.CharField(max_length=50, null=False, default="Not given")
+    location = models.CharField(max_length=200, null=False)
     latitude = models.FloatField(null=False)
     longitude = models.FloatField(null=False)
     city = models.CharField(max_length=10, null=False, default="Not given")
     state = models.CharField(max_length=10, null=False, default="Not given")
-    restaurant=models.OneToOneField(Restaurant,null=True,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.location
 
 
 class ContactNumber(models.Model):
     number = models.BigIntegerField(null=False)
     type = models.CharField(choices=ContactType.contactChoices, default=ContactType.MOBILE, max_length=10)
-    restaurant=models.OneToOneField(Restaurant,null=True,on_delete=models.CASCADE)
+
+    def __str__(self):
+       return dict(ContactType.contactChoices).get(self.type)+" : "+str(self.number)
 
 # Create your models here.

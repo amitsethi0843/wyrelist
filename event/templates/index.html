@@ -1,0 +1,38 @@
+{% extends 'layouts/admin/main.html' %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px;">
+        {% include '_leftPanel.html' %}
+        <div class="col-md-9">
+            <table class="table">
+                <thead>
+                <th>Created By</th>
+                <th>Created On</th>
+                <th>Location</th>
+                <th>Contact</th>
+
+                </thead>
+                <tbody>
+                {% for i in events %}
+                    <tr>
+                        <td>{{ i.createdBy }}</td>
+                        <td>{{ i.dateCreated }}</td>
+                        <td>{{ i.location }}</td>
+                        <td>{% if i.contact_number.first %}
+                            {% for contact in i.contact_number.all %}
+                                {{ contact | default:"Not Added" }}
+                            {% endfor %}
+                        {% endif %}
+                            {% if not i.contact_number.first %}
+                                Not Added
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}

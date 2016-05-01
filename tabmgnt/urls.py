@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from settings import REST_PREURL
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -22,6 +23,11 @@ urlpatterns = [
     url(r'^subscribe/', include('subscription.urls', namespace='subscription')),
     url(r'^restaurant/', include('resturant.urls', namespace='restaurant')),
     url(r'^user/', include('appUser.urls', namespace='user')),
+    url(r'^superUser/', include('superUser.urls', namespace='superUser')),
+
+
+    url(r'^'+REST_PREURL+'user/', include('appUser.api.urls', namespace='user_api')),
+    url(r'^'+REST_PREURL+'event/', include('event.api.urls', namespace='event_api')),
 
 
 ]

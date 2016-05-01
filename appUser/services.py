@@ -51,7 +51,6 @@ def createAppUser(registerForm, request):
         )
         appUser.save()
         if (request.FILES['profilePic']):
-            print("=======================================4")
             addUserDisplayPic(appUser, request.FILES['profilePic'])
         return appUser.user
     except Exception as e:
@@ -60,7 +59,6 @@ def createAppUser(registerForm, request):
 
 def createUser(registerForm):
     try:
-        print("=======================================3")
         user = User.objects.create_user(username=registerForm.cleaned_data['email'],
                                         email=registerForm.cleaned_data['email'],
                                         password=registerForm.cleaned_data['password'],

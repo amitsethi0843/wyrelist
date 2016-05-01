@@ -9,10 +9,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
-     'DEFAULT_RENDERER_CLASSES': (
+     'DEFAULT_RENDERER_/CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
-    'DEFAULT_FILTER_BACKENDS': 
+    'DEFAULT_FILTER_BACKENDS':
     (
         'rest_framework.filters.DjangoFilterBackend',
     ),

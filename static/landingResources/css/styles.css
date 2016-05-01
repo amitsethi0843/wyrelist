@@ -1491,3 +1491,6 @@ footer {
 	font-weight: 700;
 	margin-right: 5px;
 }
+#container-fluid{
+	background-color: #f3f3f3;
+}

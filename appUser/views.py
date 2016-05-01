@@ -1,10 +1,9 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from serializers import *
+
+from appUser.api.serializers import *
 from services import authenticateUser,generateUserToken
-import json
 
 
 # Create your views here.
@@ -16,7 +15,7 @@ class RegisterUser(APIView):
             serializer = UserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return Response({'token': serializer.data['token'], 'username': serializer.data['username']},
+                return Response({'token': serializer.data['token'], 'user   name': serializer.data['username']},
                                 status=status.HTTP_201_CREATED)
             else:
                 print(serializer.errors)

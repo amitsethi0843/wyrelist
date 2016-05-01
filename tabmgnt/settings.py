@@ -93,7 +93,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
 
-LOGIN_URL = "/user/login/"
+LOGIN_URL = "/login/"
+
+REST_PREURL="api/"
 
 ADMINS = [('Amit', 'amitsethi0843@gmail.com')]
 

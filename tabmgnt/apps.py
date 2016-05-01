@@ -8,6 +8,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'rest_framework.authtoken',
+    'widget_tweaks',
+    'superUser',
     'appUser',
     'operations',
     'rest_framework',
@@ -16,7 +18,8 @@ INSTALLED_APPS = (
     'resturant',
     'subscription',
     'common',
-    'corsheaders'
+    'corsheaders',
+    'event'
 
 )
 
