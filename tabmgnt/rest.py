@@ -16,5 +16,7 @@ REST_FRAMEWORK = {
     (
         'rest_framework.filters.DjangoFilterBackend',
     ),
-     'PAGE_SIZE': 10
+     'PAGE_SIZE': 10,
+    'DATE_FORMAT':"%Y-%m-%d",
+    'TIME_FORMAT':"%I:%M %p",
 }

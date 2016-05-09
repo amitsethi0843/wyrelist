@@ -1,4 +1,5 @@
 import binascii
+import uuid
 from operations.forms import registerForm
 from django.contrib.auth.models import User
 from models import AppUser, Gender, ProfileImage, UserImageType
@@ -6,39 +7,37 @@ from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 import datetime
 import StringIO
-import binascii
 import os
+
 from PIL import Image
 
 
-def authenticateUser(**kwargs):
-    username = kwargs['username']
-    password = kwargs['password']
+def authenticateUser(data):
+    username = data['username']
+    password = data['password']
+    print("================================" + username + password)
     if username and password:
         user = authenticate(username=username, password=password)
+        print("===========user=====================" + str(user))
+
         if user:
-            return True
+            return user
         else:
-            return False
+            return None
     else:
         return False
 
-def generateUserToken(**kwargs):
-    username = kwargs['username']
-    user=AppUser.objects.filter(username=username)
+
+def generateUserToken(user):
     if user:
         try:
-            token=Token.objects.get(user=user)
-            token.key=binascii.hexlify(os.urandom(20)).decode()
-            token.save()
-            user.token=token.key
-            user.save()
-        except Token.DoesNotExist:
-            token=Token.objects.create(user=user)
-            user.token=token.key
-            user.save()
+            token = Token.objects.get(user=user)
+            token.delete()
+        except Exception as e:
+            print(e)
+        token1=Token.objects.create(user=user)
 
-        
+        return token1
 
 
 def createAppUser(registerForm, request):

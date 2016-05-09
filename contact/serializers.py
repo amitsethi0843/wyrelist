@@ -5,10 +5,10 @@ class AddressSerializer(ModelSerializer):
 
     class Meta:
         model=Address
-        fields=("__all__")
+        exclude = ('id',)
 
 class ContactNumberSerializer(ModelSerializer):
 
     class Meta:
         model=ContactNumber
-        fields=("__all__")
+        exclude = ('id',)
