@@ -1,43 +1,43 @@
-import {Component} from "angular2/core"
-import {CommonService,Config} from "../../services/commonService"
-import {HTTP_PROVIDERS} from "angular2/http";
-import {Router} from "angular2/router"
+import {Component} from "@angular/core"
+import {CommonService} from "../../services/commonService"
+import {Auth} from "../../services/auth"
+import {HTTP_PROVIDERS} from "@angular/http";
 
 
 @Component({
-    templateUrl: '/app/templates/user/registerUser.html',
-    providers: [CommonService, HTTP_PROVIDERS,Config]
+    templateUrl: '/app/templates/public/registerUser.html',
+    providers: [CommonService, HTTP_PROVIDERS]
 })
 export class UserRegistrationComponent {
-    username:string;
-    password:string;
-    retypePassword:string;
+    registerRequest:any = {
+        username: null,
+        password: null,
+        retypePassword: null
+    }
+
     token:any;
     returnedUsername:any;
 
-    constructor(private commonService:CommonService, private router:Router,private config:Config) {
+    constructor(private commonService:CommonService, private auth:Auth) {
     }
 
     registerUser() {
         this.commonService.setData(
-            '&username=' + this.username +
-            '&email=' + this.username +
-            '&password=' + this.password +
-            '&retypePassword=' + this.retypePassword
+            this.registerRequest
         );
         this.commonService.setUrl('user/register/');
         this.commonService.postData().subscribe(
             data=> {
+                console.log("--------------" + JSON.stringify(data));
                 if (data.token && data.username) {
                     this.token = data.token;
                     this.returnedUsername = data.username;
-                    this.config.setUserName(this.returnedUsername);
-                    this.config.setUserToken(this.token);
-                    location.reload()
+                    this.auth.setUserData(this.token, this.returnedUsername);
+                    //this.auth.setUserToken();
+                    //location.reload()
                 }
             },
-            error=>console.log(JSON.stringify(error)),
-            ()=>console.log("fininshed")
+            error=>console.log(JSON.stringify(error))
         )
     }
 

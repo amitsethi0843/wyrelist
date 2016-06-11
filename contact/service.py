@@ -9,7 +9,9 @@ def createAddress(**kwargs):
     address = Address()
     address.latitude = kwargs.get('latitude')
     address.longitude = kwargs.get('longitude')
-    address.location = kwargs.get('location')
+    address.line1=kwargs.get('line1')
+    address.line2=kwargs.get('line2')
+    address.location = kwargs.get('location') if kwargs.get('location') else ""
     address.city = kwargs.get('city') if kwargs.has_key('city') else ""
     address.state = kwargs.get('state') if kwargs.has_key('state') else ""
     address.save()
@@ -22,6 +24,8 @@ def createAddressFromForm(addressForm):
     except Exception as e:
         log.error(e)
     return None
+
+
 
 def createContactNumberFromForm(contactForm):
     try:

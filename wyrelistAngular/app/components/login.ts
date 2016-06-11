@@ -1,34 +1,44 @@
-import {Component} from 'angular2/core'
-import {Input} from "angular2/core";
+import {Component} from '@angular/core'
+import {Input} from "@angular/core";
 import {CommonService} from "../services/commonService";
-import {HTTP_PROVIDERS} from "angular2/http";
+import {Auth} from "../services/auth";
+
+import {HTTP_PROVIDERS} from "@angular/http";
 
 @Component({
     templateUrl: '/app/templates/public/login.html',
-    inputs: ['email', 'password'],
     providers: [CommonService, HTTP_PROVIDERS]
 })
 export class LoginComponent {
-    email:string;
-    password:string;
+    loginRequest:any = {
+        email: null,
+        password: null,
+        username: null
+    }
     getData:string;
 
-    constructor(private commonService:CommonService) {
+    constructor(private commonService:CommonService, private auth:Auth) {
 
     }
 
-    userLogin() {
-        if (this.email && this.password) {
-            const data = "username=" + this.email + "&password=" + this.password;
-            this.commonService.setData(data);
-            this.commonService.setUrl("/signUp/login");
+    loginUser() {
+        if (this.loginRequest.email && this.loginRequest.password) {
+            //const data = "username=" + this.email + "&password=" + this.password;
+            this.loginRequest.username = this.loginRequest.email;
+            this.commonService.setData(this.loginRequest);
+            this.commonService.setUrl("user/login/");
 
             this.commonService.postData().subscribe(
-                data=>this.getData = JSON.stringify(data),
-                error=>alert(JSON.stringify(error)),
+                data=> {
+                    if (data.token && data.username) {
+                        this.auth.setUserData(data.token, data.username);
+                        //this.auth.setUserToken();
+                        //location.reload()
+                    }
+                },
+                error=>console.log("error"),
                 ()=>console.log("fininshed")
             )
-            alert(JSON.stringify(this.getData))
         }
     }
 }

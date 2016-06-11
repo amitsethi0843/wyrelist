@@ -49,7 +49,7 @@ class registerForm(forms.Form):
 
 
 class loginForm(forms.Form):
-    username = forms.EmailField(max_length=70, widget=forms.EmailInput(
+    username = forms.CharField(max_length=70, widget=forms.EmailInput(
         attrs={'class': 'form-control', 'placeholder': 'Your email address'}),
                                 error_messages={'required': 'Please enter your email id'})
     password = forms.CharField(

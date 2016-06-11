@@ -7,9 +7,9 @@ from tabmgnt.settings import MEDIA_ROOT,STATIC_ROOT
 logging.basicConfig()
 log=logging.getLogger(__name__)
 
-def get_fixedDepositFile_upload_path(instance, filename):
+def get_event_upload_path(instance, filename):
     return os.path.join(
-      instance.fixedDeposit.channel.name+"/"+"fixedDeposit/"+time.strftime("%d-%m-%y")+'/'+str(instance.id)+'-'+filename )
+      "event/"+str(instance.event.uuid)+"/"+str(instance.id)+'-'+filename )
 
 def get_userImage_upload_path(instance, filename):
     return os.path.join(

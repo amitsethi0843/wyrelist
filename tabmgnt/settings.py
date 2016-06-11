@@ -16,6 +16,12 @@ from apps import *
 from database import *
 from rest import *
 from cors import *
+from config import *
+try :
+	from local_config import *
+except ImportError as e:
+	pass
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -119,3 +125,4 @@ STATIC_ROOT = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+FILEBROWSER_DIRECTORY = ''

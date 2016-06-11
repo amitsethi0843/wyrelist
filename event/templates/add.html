@@ -13,7 +13,7 @@
     <div class="container-fluid" id="container-fluid" style="margin-top: 50px;padding-top: 30px">
         {% include '_leftPanel.html' %}
         <div class="col-md-9">
-            <form action="{% url 'superUser:event:add' %}" method="post">
+            <form action="{% url 'superUser:event:add' %}" method="post" enctype="multipart/form-data">
                 <div class="row marginStyle">
 
                     <div class="col-md-6">
@@ -37,7 +37,23 @@
                 <div class="row marginStyle">
                     <div class="col-md-12">
                         <div class="col-md-3">
-                            Location
+                            Line 1
+                        </div>
+                        <div class="col-md-9">
+                            {{ addressForm.line1|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            Line 2
+                        </div>
+                        <div class="col-md-9">
+                            {{ addressForm.line2|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            Area
                         </div>
                         <div class="col-md-9">
                             {{ addressForm.location|attr:"class:form-control" }}
@@ -48,6 +64,8 @@
 
                         </div>
                     </div>
+
+
                 </div>
                 <div class="row marginStyle">
                     <div class="col-md-6">
@@ -91,6 +109,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="col-md-6">
+                           Duration (In Days)
+                        </div>
+                        <div class="col-md-6">
+                            {{ eventRuleForm.duration|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-6">
                             Event Start Time
                         </div>
                         <div class="col-md-6">
@@ -106,6 +132,8 @@
                             {{ eventRuleForm.endingTime|attr:"class:form-control" }}
                         </div>
                     </div>
+
+
                     {#                    <div class="col-md-12">#}
                     {#                        <div class="col-md-6">#}
                     {#                            Entry Per Fees(Leave emtpy if free)#}
@@ -130,6 +158,14 @@
                         </div>
                         <div class="col-md-9">
                             {{ eventForm.description|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                   <div class="col-md-12">
+                        <div class="col-md-3">
+                            Images
+                        </div>
+                        <div class="col-md-9">
+                            <input type="file" name="eventImages" multiple>
                         </div>
                     </div>
                 </div>

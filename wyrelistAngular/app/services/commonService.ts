@@ -1,58 +1,40 @@
-import {Injectable,EventEmitter} from "angular2/core";
-import {Http,Headers} from "angular2/http"
+import {Injectable,EventEmitter} from "@angular/core";
+import {Http,Headers} from "@angular/http"
 import 'rxjs/add/operator/map'
+import {Auth} from "./auth"
+import {AppSettings} from "../config/appSettings"
+//import {Observable} from "rxjs/Rx";
+//import {Observer} from "rxjs/Observer";
 
-
-@Injectable()
-export class Config {
-    username:string
-    usertoken:string
-    usernameChange:EventEmitter = new EventEmitter();
-    userTokenChange:EventEmitter = new EventEmitter();
-
-
-    appUrl:string = "http://127.0.0.1:8000/";
-
-    static getUserToken() {
-        return localStorage.getItem('userToken');
-    }
-
-    static getUserName() {
-        return localStorage.getItem('username');
-    }
-
-    setUserName(username:string) {
-        this.username = username;
-        this.usernameChange.emit(username);
-        localStorage.setItem('username', this.username);
-    }
-
-    setUserToken(token:string) {
-        this.usertoken = token;
-        this.userTokenChange.emit(token);
-        localStorage.setItem('userToken', this.usertoken);
-    }
-}
 
 @Injectable()
 export class CommonService {
     url:string;
-    data:string;
+    data:any;
 
-    constructor(private http:Http, private config:Config) {
+    constructor(private http:Http, private auth:Auth) {
     }
 
-    setHeader(headers:Headers){
+    setHeader(headers:Headers) {
+        var username:string = this.auth.getUserName();
+        var token:string = this.auth.getUserToken();
+        //alert(username,token);
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers.append('username',this.config.getUserName)
-        headers.append('token',this.config.getUserToken)
+        //username ?  : "";
+        if (token && token != "") {
+            console.log("token found");
+            //    headers.append('token', token);
+            //    if(username){
+            //        headers.append('username', username)
+            //    }
+        }
     }
 
     setUrl(url:string) {
-        this.url = this.config.appUrl + url
+        this.url = AppSettings._fetch().appServer.url + url
     }
 
-    setData(data:string) {
+    setData(data:any) {
         this.data = data;
     }
 
@@ -66,7 +48,18 @@ export class CommonService {
     postData() {
         var headers = new Headers();
         this.setHeader(headers);
-        return this.http.post(this.url, this.data, {headers: headers})
-            .map((response) => response.json());
+        var requestdata = this.convertRequestParams();
+        return this.http.post(this.url, requestdata, {headers: headers}).map((response) => response.json());
+    }
+
+
+    convertRequestParams() {
+        var requestParam = "";
+        var totalParams = Object.keys(this.data).length;
+        for (var i in this.data) {
+            var lastKey = Object.keys(this.data).indexOf(i) == (totalParams - 1);
+            requestParam += (i + "=" + this.data[i] + (lastKey ? "" : "&"))
+        }
+        return requestParam ? (requestParam) : ""
     }
 }

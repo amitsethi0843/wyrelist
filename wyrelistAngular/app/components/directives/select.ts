@@ -1,4 +1,4 @@
-import {Component,Input,Output,EventEmitter} from 'angular2/core'
+import {Component,Input,Output,EventEmitter} from '@angular/core'
 
 @Component({
     selector:'wyre-select',
@@ -6,10 +6,10 @@ import {Component,Input,Output,EventEmitter} from 'angular2/core'
     '<option selected="selected" value=""> Please Select</option>' +
     '<option *ngFor="#item of items" value="{{item}}">{{item}}</option>' +
     '</select>',
-    host: {
-        "[value]": 'requiredModel',
-        "(input)": "modelChanged.next($event.target.value)"
-    }
+    //host: {
+    //    "[value]": 'requiredModel',
+    //    "(input)": "modelChanged.next($event.target.value)"
+    //}
 })
 //select #sel class="{{className}}" (change)="modelChanged.emit(sel.value)"
 export class SelectDirective{
@@ -17,11 +17,11 @@ export class SelectDirective{
     @Input() id;
     @Input() requiredModel;
     @Input() items;
-    @Output() modelChanged:EventEmitter = new EventEmitter();
+    //@Output() modelChanged:EventEmitter = new EventEmitter();
     @Input() className;
 
-    ngOnInit(){
-        this.modelChanged.emit(this.requiredModel)
-    }
+    //ngOnInit(){
+    //    this.modelChanged.emit(this.requiredModel)
+    //}
 
 }
