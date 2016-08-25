@@ -1,0 +1,154 @@
+<ol class="breadcrumb pull-right">
+  <li><a href="javascript:;">Home</a></li>
+  <li><a href="javascript:;">Register</a></li>
+  <!--<li class="active">Form Elements</li>-->
+</ol>
+<h1 class="page-header">Events</h1>
+
+<div class="row">
+  <div class="panel panel" data-sortable-id="ui-typography-1">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-5">
+          <b>From</b>
+          <datepicker_self [abbreviatedMonths]="true"
+                           (dateChanged)="eventFilter.fromDate=$event.date+'/'+$event.month+'/'+$event.year"
+                           [componentClass]="'form-control'" [componentId]="'fromDate'"></datepicker_self>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+          <b>To</b>
+          <datepicker_self [abbreviatedMonths]="true"
+                           (dateChanged)="eventFilter.toDate=$event.date+'/'+$event.month+'/'+$event.year"
+                           [componentClass]="'form-control'" [componentId]="'toDate'"></datepicker_self>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <b>Event Type</b>
+          <select class="form-control">
+            <option value="">Select</option>
+            <option *ngFor="#type of eventTypes.values" value="{{type.key}}">{{type.value}}</option>
+          </select>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+          <div class="col-md-6">
+            <b>Min Fees</b>
+            <input type="text" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+            <b>Max Fees</b>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+      </div>
+
+
+      <!--<datepicker_self [abbreviatedMonths]="true" (outputDate)="filter.toDate=$event"-->
+      <!--[componentClass]="'form-control'" [componentId]="'toDate'" ></datepicker_self>-->
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- begin col-6 -->
+  <!-- begin panel -->
+
+  <!-- end panel -->
+
+
+  <ul class="result-list">
+    <li *ngFor="#event of events">
+      <div class="result-image">
+
+        <a [routerLink]="['EventDetail',{'id':event.uuid}]"><img [src]="event.event_images?event.event_images.image:''"
+                                                                 alt=""></a>
+      </div>
+      <div class="result-info" style="min-width: 550px;">
+        <h4 class="title"><a [routerLink]="['EventDetail',{'id':event.uuid}]">{{event.description}}</a></h4>
+        <p class="location">{{event.location.location}}</p>
+        <p class="desc" style="font-size: 12px">
+          <i class="fa fa-calendar"></i> <span style="font-weight: bold">On Date</span> {{event.eventRule.dateOfEvent |
+          parseDate:"yyyy-MM-dd"}}
+          <span style="font-weight: bold"> Duration</span> {{event.eventRule.duration}} Day/s<br>
+          <i class="fa fa-clock-o"></i> <span style="font-weight: bold">From</span> {{event.eventRule.startingTime}}
+          <span style="font-weight: bold">Till</span> {{event.eventRule.endingTime}}
+        </p>
+        <div class="btn-row">
+          <a href="javascript:;" data-toggle="tooltip" data-container="body" data-title="Analytics"
+             data-original-title="" title=""><i class="fa fa-fw fa-bar-chart-o"></i></a>
+          <a href="javascript:;" data-toggle="tooltip" data-container="body" data-title="Tasks" data-original-title=""
+             title=""><i class="fa fa-fw fa-tasks"></i></a>
+          <a href="javascript:;" data-toggle="tooltip" data-container="body" data-title="Configuration"
+             data-original-title="" title=""><i class="fa fa-fw fa-cog"></i></a>
+          <a href="javascript:;" data-toggle="tooltip" data-container="body" data-title="Performance"
+             data-original-title="" title=""><i class="fa fa-fw fa-tachometer"></i></a>
+          <a href="javascript:;" data-toggle="tooltip" data-container="body" data-title="Users" data-original-title=""
+             title=""><i class="fa fa-fw fa-user"></i></a>
+        </div>
+      </div>
+      <div class="result-price">
+        <i class="fa fa-rupee"></i> {{event.eventRule.feesPerEntry}}
+        <small>PER {{event.eventRule.entryType}} ENTRY</small>
+        <a [routerLink]="['EventDetail',{'id':event.uuid}]" class="btn btn-inverse btn-block">View Details</a>
+      </div>
+    </li>
+  </ul>
+
+
+  <!--<a [routerLink]="['EventDetail',{'id':event.uuid}]">-->
+
+  <!--<div class="panel-body">-->
+  <!--<div class="panel panel-inverse" data-sortable-id="ui-widget-4">-->
+  <!--<div class="panel-heading">-->
+  <!--<div class="progress progress-striped progress-sm active pull-right m-t-5">-->
+  <!--<div class="progress-bar progress-bar-success" style="width: 40%">40%</div>-->
+  <!--</div>-->
+  <!--<h4 class="panel-title"></h4>-->
+  <!--</div>-->
+  <!--<div class="panel-body">-->
+  <!--<p [hidden]="!event.location.location">-->
+  <!--<span><i class="fa fa-globe" style="font-size: 16px"></i></span> <em style="font-size: 14px">-->
+  <!--{{event.location.location}}</em>-->
+  <!--</p>-->
+  <!--<p [hidden]="!event.createdBy.first_name">-->
+  <!--<span><i class="fa fa-male" style="font-size: 16px"></i></span> <em style="font-size: 14px">-->
+  <!--{{event.createdBy.first_name}} {{event.createdBy.last_name}}</em>-->
+  <!--</p>-->
+  <!--<p [hidden]="!event.createdBy.email">-->
+  <!--<span><i class="fa fa-envelope" style="font-size: 16px"></i></span> <em style="font-size: 14px">-->
+  <!--{{event.createdBy.email}}</em>-->
+  <!--</p>-->
+
+  <!--<p [hidden]="!event.contact_number.length">-->
+  <!--<span><i class="fa fa-phone" style="font-size: 16px"></i></span>-->
+  <!--<span *ngFor="#contact of event.contact_number">-->
+  <!--<em style="font-size: 14px">-->
+  <!--{{contact.number}},</em>-->
+  <!--</span>-->
+
+  <!--</p>-->
+
+  <!--<p [hidden]="!event.eventRule.entryChargeable">-->
+  <!--<span><i class="fa fa-rupee" style="font-size: 16px"></i></span>-->
+  <!--<em style="font-size: 14px">-->
+  <!--{{event.eventRule.feesPerEntry}} per entry-->
+  <!--</em>-->
+  <!--</p>-->
+  <!--<p>-->
+  <!--<span><i class="fa fa-clock-o" style="font-size: 16px"></i></span>-->
+  <!--<em style="font-size: 14px">-->
+  <!--{{event.eventRule.dateOfEvent | parseDate:"yyyy-MM-dd"}}-->
+  <!--</em>-->
+  <!--</p>-->
+
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</a>-->
+  <!-- end col-6 -->
+  <!-- begin col-6 -->
+  <!-- end col-6 -->
+</div>

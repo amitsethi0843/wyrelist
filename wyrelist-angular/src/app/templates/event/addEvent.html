@@ -1,0 +1,86 @@
+<h1 class="page-header">Create An Event</h1>
+<div class="row">
+  <div class="col-md-8 ui-sortable">
+    <div class="panel panel-inverse" data-sortable-id="table-basic-1">
+      <div class="panel-heading">
+        <div class="panel-heading-btn">
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default"
+             data-click="panel-expand"><i class="fa fa-expand"></i></a>
+          <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
+             data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+        </div>
+        <h4 class="panel-title">Event</h4>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="font-weight: bold">Event Type </label>
+              <div class="col-lg-12">
+                <select class="form-control" [(ngModel)]="input.entry.type">
+                  <option value="">Select</option>
+                  <option *ngFor="#type of formElementsValues.eventType"  value="{{type.key}}">{{type.value}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="font-weight: bold">Entry Chargeable</label>
+              <div class="col-lg-12">
+                <select class="form-control" [(ngModel)]="input.entry.entryChargable" >
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label style="font-weight: bold">Entry Fees</label>
+              <div class="col-lg-12">
+                <input type="text" class="form-control" [disabled]="(!input.entry.entryChargable || input.entry.entryChargable=='false')" [(ngModel)]="input.entry.fees">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label style="font-weight: bold">Date</label>
+              <datepicker [(ngModel)]="input.event.date"></datepicker>
+            </div>
+          </div>
+          </div>
+        {{input.event.date}}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label style="font-weight: bold">Start Time</label>
+              <timepicker (timeChanged)="input.event.eventStartTime=$event.hours+':'+$event.minutes+' '+$event.ampm"
+                          [twentyFourHours]="false" [componentId]="'eventStartTime'"
+                          [componentClass]="'form-control'"></timepicker>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label style="font-weight: bold">End Time</label>
+              <timepicker (timeChanged)="input.event.eventEndTime=$event.hours+':'+$event.minutes+' '+$event.ampm"
+                          [twentyFourHours]="false" [componentId]="'eventEnd'"
+                          [componentClass]="'form-control'"></timepicker>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="input-group bootstrap-timepicker ">-->
+<!--<input type="text" id="startTime" #datePickerValue (blur)="input.event.eventStartTime=datePickerValue.value" [(ngModel)]="input.event.eventStartTime" (blur)="addEvent()" class="form-control input-small" timepicker>-->
+<!--<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>-->
+<!--</div>-->
