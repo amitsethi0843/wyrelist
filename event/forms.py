@@ -5,7 +5,7 @@ from models import Event, EventRule, EventImage
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('description', 'createdBy')
+        fields = ('description', 'createdBy','totalEntries')
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5}),
         }

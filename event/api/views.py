@@ -1,13 +1,15 @@
-from rest_framework.generics import ListAPIView,RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from rest_framework.views import APIView
-from serializers import EventSerializer
+from serializers import EventSerializer, EventCreateSerializer
 from event.models import Event
-from rest_framework.response import Response
+from event.api.filters import EventFilter
 
 
 class GetEventList(ListAPIView):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
+    filter_class = EventFilter
+
 
 class GetEvent(RetrieveAPIView):
     serializer_class = EventSerializer
@@ -15,3 +17,7 @@ class GetEvent(RetrieveAPIView):
     lookup_field = "uuid"
     lookup_url_kwarg = "eventId"
 
+
+class CreateEvent(CreateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventCreateSerializer

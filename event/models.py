@@ -13,7 +13,7 @@ log=logging.getLogger(__name__)
 
 class EventRule(models.Model):
     entryType = models.CharField(choices=EntryType.entryChoices, null=False, default=EntryType.SINGLE, max_length=20)
-    entryChargeable = models.BooleanField()
+    entryChargeable = models.BooleanField(default=False)
     feesPerEntry = models.FloatField(null=True,default=0)
     dateOfEvent = models.DateField(null=False)
     duration=models.IntegerField(null=False,default=1)
@@ -28,6 +28,7 @@ class Event(models.Model):
     location = models.ForeignKey(Address, null=False)
     contact_number = models.ManyToManyField(ContactNumber, null=False)
     eventRule = models.OneToOneField(EventRule)
+    totalEntries=models.IntegerField(null=False,blank=True,default=100)
     dateCreated = models.DateTimeField(auto_now_add=True)
     lastUpdated = models.DateTimeField(auto_now=True)
 
@@ -95,6 +96,12 @@ class EventAmenity(models.Model):
     type=models.CharField(choices=AmenityType.amenityTypeChoices,default=AmenityType.NONE,max_length=20)
     location = models.ForeignKey(Address, null=False)
     priority=models.IntegerField(null=False,default=0)
+
+
+class EventTicket(models.Model):
+    event=models.ForeignKey(Event,null=False,unique=False)
+    user=models.ForeignKey(AppUser, null=False,unique=False)
+    totalTickets=models.IntegerField(null=False)
 
 
 

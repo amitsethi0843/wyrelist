@@ -123,6 +123,13 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = "/static/"
 
+BIKA={
+    'url':'http://localhost:8080/Plone/',
+    'credentials':
+        {'username':"admin",
+         'password':"h6026pZX"}
+}
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 FILEBROWSER_DIRECTORY = ''

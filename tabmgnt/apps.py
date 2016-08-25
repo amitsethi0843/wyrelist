@@ -19,7 +19,7 @@ INSTALLED_APPS = (
     'subscription',
     'common',
     'corsheaders',
-    'event'
+    'event',
 
 )
 

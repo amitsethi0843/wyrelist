@@ -1,3 +1,0 @@
-enum RestaurantRoleType{
-    Doorman,Waiter
-}

@@ -164,8 +164,14 @@
                         <div class="col-md-3">
                             Images
                         </div>
-                        <div class="col-md-9">
-                            <input type="file" name="eventImages" multiple>
+                        <div class="col-md-3">
+                            <input type="file" name="eventImages" multiple class="form-control">
+                        </div>
+                       <div class="col-md-3">
+                            Total Tickets
+                        </div>
+                        <div class="col-md-3">
+                            {{ eventForm.totalEntries|attr:"class:form-control" }}
                         </div>
                     </div>
                 </div>

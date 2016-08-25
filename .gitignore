@@ -8,10 +8,38 @@
 .DS_Store
 .idea/
 media/
+
+
 node_modules/
 */node_modules/
 */typings/
 */nmp-debug*
 */.idea/
 */bower_components/
+*/dist
+*/tmp
+
+# IDEs and editors
+*/.idea
+*/.project
+*/.classpath
+*/*.launch
+*/.settings/
+
+# misc
+*/.sass-cache
+*/connect.lock
+*/coverage/*
+*/libpeerconnection.log
+*/npm-debug.log
+*/testem.log
+
+# e2e
+*/e2e/*.js
+*/e2e/*.map
+
+#System Files
+*/.DS_Store
+*/Thumbs.db
+
 tabmgnt/local_settings.py

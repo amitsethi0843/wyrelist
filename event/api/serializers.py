@@ -11,6 +11,17 @@ class EventRuleSerializer(ModelSerializer):
         exclude = ('id',)
 
 
+class EventCreateSerializer(ModelSerializer):
+    location = AddressSerializer()
+    contact_number = ContactNumberSerializer(many=True,required=False)
+    eventRule = EventRuleSerializer()
+    createdBy = serializers.EmailField(required=True)
+    class Meta:
+        model = Event
+        fields = ('uuid','totalEntries', 'createdBy', 'description', 'location', 'contact_number',
+                  'eventRule',)
+
+
 class EventSerializer(ModelSerializer):
     location = AddressSerializer()
     contact_number = ContactNumberSerializer(many=True,required=False)
@@ -20,5 +31,12 @@ class EventSerializer(ModelSerializer):
     nearby_locations=serializers.ReadOnlyField()
     class Meta:
         model = Event
-        fields = ('uuid', 'createdBy', 'description', 'location', 'contact_number',
+        fields = ('uuid','totalEntries', 'createdBy', 'description', 'location', 'contact_number',
                   'eventRule','event_images','nearby_locations',)
+
+class EventTicketSerializer(ModelSerializer):
+    class Meta:
+        models=EventTicket
+        include=('totalTickets',)
+
+

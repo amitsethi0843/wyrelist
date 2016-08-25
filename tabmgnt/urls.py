@@ -27,6 +27,4 @@ urlpatterns = [
 
     url(r'^'+REST_PREURL+'user/', include('appUser.api.urls', namespace='user_api')),
     url(r'^'+REST_PREURL+'event/', include('event.api.urls', namespace='event_api')),
-
-
 ]
