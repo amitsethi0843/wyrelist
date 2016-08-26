@@ -3,6 +3,7 @@ import {Http,Headers} from "@angular/http"
 import {Auth} from "./auth"
 import {AppSettings} from "../config/appSettings"
 import 'rxjs/add/operator/map'
+import { environment } from '../environment';
 //import {Observable} from "rxjs/Rx";
 //import {Observer} from "rxjs/Observer";
 
@@ -31,7 +32,7 @@ export class CommonService {
     }
 
     setUrl(url:string) {
-        this.url = AppSettings._fetch().appServer.url + url
+        this.url = environment.serverUrl + url
     }
 
     setData(data:any) {

@@ -6,8 +6,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var appSettings_1 = require("../config/appSettings");
 require('rxjs/add/operator/map');
+var environment_1 = require('../environment');
 //import {Observable} from "rxjs/Rx";
 //import {Observer} from "rxjs/Observer";
 var CommonService = (function () {
@@ -26,7 +26,7 @@ var CommonService = (function () {
         }
     };
     CommonService.prototype.setUrl = function (url) {
-        this.url = appSettings_1.AppSettings._fetch().appServer.url + url;
+        this.url = environment_1.environment.serverUrl + url;
     };
     CommonService.prototype.setData = function (data) {
         this.data = data;

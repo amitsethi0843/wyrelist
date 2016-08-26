@@ -15,7 +15,6 @@ var AppSettings = (function () {
         };
     };
     AppSettings.application = {
-        serverUrl: "http://127.0.0.1:8000/api/",
         passwordLength: 4
     };
     AppSettings.google = {

@@ -29,7 +29,6 @@
                                    placeholder="Enter Your Email">
                           <p *ngIf="showError">
                               <span *ngIf="!registrationForm.controls.username.valid">
-                                {{registrationForm.controls.username.errors}}
                                   This field is required
                                 </span>
                           </p>

@@ -1,6 +1,5 @@
 export class AppSettings {
   private static application:any = {
-    serverUrl: "http://127.0.0.1:8000/api/",
     passwordLength: 4
   }
 
