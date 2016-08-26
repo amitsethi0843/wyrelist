@@ -55,6 +55,7 @@ def test(request):
                                               longitude=longitude)
 
             response = response['results']
+            print"============="+str(response)
             for priority, i in enumerate(response):
                 address = Address()
                 address.line1 = i['name']

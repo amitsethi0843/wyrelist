@@ -16,7 +16,6 @@ def createEvent(eventForm, eventRuleForm, addressForm, contactForm):
         eventRule = eventRuleForm.save()
         description = eventForm.cleaned_data['description']
         created_by = eventForm.cleaned_data['createdBy']
-        print("======================" + str(type(contact)))
         if contact and address and eventRule and created_by:
             event = Event.create(description, created_by, address, contact, eventRule)
             createEventAmenities(event)
