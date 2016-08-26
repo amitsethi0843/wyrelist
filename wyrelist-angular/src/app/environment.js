@@ -2,6 +2,7 @@
 // Different environments can be found in config/environment.{dev|prod}.ts
 // The build system defaults to the dev environment
 exports.environment = {
-    production: false
+    production: false,
+    serverUrl: "http://rest.wyrelist.com/api/"
 };
 //# sourceMappingURL=environment.js.map
