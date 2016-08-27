@@ -11,8 +11,9 @@ var commonService_1 = require("../../../services/commonService");
 var router_deprecated_1 = require("@angular/router-deprecated");
 var datepicker_1 = require("../../directives/datepicker");
 var EventListComponent = (function () {
-    function EventListComponent(commonService) {
+    function EventListComponent(commonService, customEventsService) {
         this.commonService = commonService;
+        this.customEventsService = customEventsService;
         this.eventTypes = {
             values: [
                 { key: "SINGLE", value: "Single" },
@@ -24,6 +25,7 @@ var EventListComponent = (function () {
             fromDate: null,
             toDate: null
         };
+        this.customEventsService.changeSidePanelVisibility(true);
     }
     EventListComponent.prototype.ngOnInit = function () {
         this.fetchEventList();

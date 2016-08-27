@@ -4,6 +4,7 @@ import { REACTIVE_FORM_DIRECTIVES,FormGroup,FormControl,FormBuilder,Validators }
 import {Auth} from "../../services/auth";
 import {CommonService} from "../../services/commonService"
 import {HTTP_PROVIDERS,Http} from "@angular/http";
+import {CustomEventsService} from "../../services/customEvents";
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent {
   getData:string;
   showError:boolean;
 
-  constructor(private auth:Auth, private _fb:FormBuilder, private commonService:CommonService) {
+  constructor(private auth:Auth, private _fb:FormBuilder, private commonService:CommonService, private customEventsService:CustomEventsService) {
+    this.customEventsService.changeSidePanelVisibility(true);
     this.loginForm = this._fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(4)]]

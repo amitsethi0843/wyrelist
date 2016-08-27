@@ -11,8 +11,9 @@ var timepicker_1 = require("../../directives/jqueryUI/timepicker");
 var ng2_bootstrap_1 = require("ng2-bootstrap");
 var forms_1 = require("@angular/forms");
 var AddEventComponent = (function () {
-    function AddEventComponent(commonService) {
+    function AddEventComponent(commonService, customEventsService) {
         this.commonService = commonService;
+        this.customEventsService = customEventsService;
         this.formElementsValues = {
             eventType: [
                 { key: "SINGLE", value: "Single" },
@@ -50,6 +51,7 @@ var AddEventComponent = (function () {
             },
             createdBy: null
         };
+        this.customEventsService.changeSidePanelVisibility(true);
     }
     AddEventComponent.prototype.addEvent = function () {
         console.log(JSON.stringify(this.input.event));

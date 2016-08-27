@@ -4,6 +4,7 @@ import {CommonService} from "../../../services/commonService"
 import {Timepicker} from "../../directives/jqueryUI/timepicker"
 import {DATEPICKER_DIRECTIVES} from "ng2-bootstrap";
 import {NgModel} from "@angular/forms"
+import {CustomEventsService} from "../../../services/customEvents";
 @Component({
   templateUrl: '/app/templates/event/addEvent.html',
   providers: [CommonService, HTTP_PROVIDERS,NgModel],
@@ -49,7 +50,8 @@ export class AddEventComponent {
     createdBy: null
   };
 
-  constructor(private commonService:CommonService) {
+  constructor(private commonService:CommonService,private customEventsService:CustomEventsService) {
+    this.customEventsService.changeSidePanelVisibility(true);
 
   }
 

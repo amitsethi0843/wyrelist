@@ -4,7 +4,7 @@ from appUser.models import AppUser
 from choices import *
 import portfolioFile.services as fileService
 import uuid
-from tabmgnt.settings import MEDIA_ROOT
+from tabmgnt.settings import IMAGE_ROOT
 import logging
 logging.basicConfig()
 import json
@@ -56,7 +56,7 @@ class Event(models.Model):
             # print(hasattr(self,'eventImages'))
             eventImage=self.eventimage_set.values()[0]
             # for image in eventImages:
-            eventImage['image']=str(MEDIA_ROOT)+"/"+str(eventImage['image'])
+            eventImage['image']=str(IMAGE_ROOT)+"/"+str(eventImage['image'])
             return eventImage
         except Exception as e:
             log.error(e)

@@ -12,11 +12,13 @@ var capitalize_1 = require("../../../pipes/capitalize");
 var customDate_1 = require("../../../pipes/customDate");
 var constants_1 = require("../../../config/constants");
 var EventDetailComponent = (function () {
-    function EventDetailComponent(params, commonService) {
+    function EventDetailComponent(params, commonService, customEventsService) {
         this.commonService = commonService;
+        this.customEventsService = customEventsService;
         this.nearByRailywayStations = [];
         this.nearByMetroStations = [];
         this.nearByHotels = [];
+        this.customEventsService.changeSidePanelVisibility(true);
         this.eventId = params.get("id");
         this.fetchEventById();
     }

@@ -11,15 +11,17 @@ var http_1 = require("@angular/http");
 var forms_1 = require('@angular/forms');
 var validators_1 = require('../../services/validators');
 var UserRegistrationComponent = (function () {
-    function UserRegistrationComponent(commonService, auth, _fb) {
+    function UserRegistrationComponent(commonService, auth, _fb, customEventsService) {
         this.commonService = commonService;
         this.auth = auth;
         this._fb = _fb;
+        this.customEventsService = customEventsService;
         this.registerRequest = {
             username: null,
             password: null,
             retypePassword: null
         };
+        this.customEventsService.changeSidePanelVisibility(true);
         this.registrationForm = this._fb.group({
             username: ['', [forms_1.Validators.required, validators_1.CustomValidators.validateEmail]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(appSettings_1.AppSettings._fetch().appServer.passwordLength)]],

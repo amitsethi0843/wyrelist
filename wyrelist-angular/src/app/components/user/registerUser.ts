@@ -1,5 +1,6 @@
 import {Component} from "@angular/core"
 import {CommonService} from "../../services/commonService"
+import {CustomEventsService} from "../../services/customEvents"
 import {Auth} from "../../services/auth"
 import {AppSettings} from "../../config/appSettings"
 import {HTTP_PROVIDERS} from "@angular/http";
@@ -22,7 +23,8 @@ export class UserRegistrationComponent {
   returnedUsername:any;
   showError:boolean;
 
-  constructor(private commonService:CommonService, private auth:Auth, private _fb:FormBuilder) {
+  constructor(private commonService:CommonService, private auth:Auth, private _fb:FormBuilder,private customEventsService:CustomEventsService) {
+    this.customEventsService.changeSidePanelVisibility(true)
     this.registrationForm=this._fb.group({
       username:['', [Validators.required,CustomValidators.validateEmail]],
       password:['',[Validators.required,Validators.minLength(AppSettings._fetch().appServer.passwordLength)]],

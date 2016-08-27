@@ -9,10 +9,12 @@ var forms_1 = require('@angular/forms');
 var commonService_1 = require("../../services/commonService");
 var http_1 = require("@angular/http");
 var LoginComponent = (function () {
-    function LoginComponent(auth, _fb, commonService) {
+    function LoginComponent(auth, _fb, commonService, customEventsService) {
         this.auth = auth;
         this._fb = _fb;
         this.commonService = commonService;
+        this.customEventsService = customEventsService;
+        this.customEventsService.changeSidePanelVisibility(true);
         this.loginForm = this._fb.group({
             username: ['', [forms_1.Validators.required]],
             password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(4)]]

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  serverUrl: "http://rest.wyrelist.com/api/"
+  serverUrl: "http://127.0.0.1/api/"
 };

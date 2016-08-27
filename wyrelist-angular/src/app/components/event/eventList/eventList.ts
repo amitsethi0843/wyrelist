@@ -9,6 +9,7 @@ import {CommonService} from "../../../services/commonService";
 import {OnInit} from "@angular/core";
 import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {DatePicker_Self} from "../../directives/datepicker"
+import {CustomEventsService} from "../../../services/customEvents";
 
 @Component({
   templateUrl: '/app/templates/event/eventList/eventList.html',
@@ -33,7 +34,8 @@ export class EventListComponent implements OnInit {
     toDate: null
   };
 
-  constructor(private commonService:CommonService) {
+  constructor(private commonService:CommonService,private customEventsService:CustomEventsService) {
+    this.customEventsService.changeSidePanelVisibility(true);
   }
 
   ngOnInit() {
