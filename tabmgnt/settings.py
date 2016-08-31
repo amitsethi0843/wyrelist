@@ -16,6 +16,7 @@ from apps import *
 from database import *
 from rest import *
 from cors import *
+from s3 import *
 from config import *
 try :
 	from local_config import *
@@ -95,6 +96,8 @@ WSGI_APPLICATION = 'tabmgnt.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
+
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
@@ -111,7 +114,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
@@ -125,7 +127,8 @@ STATIC_ROOT = "/static/"
 
 
 
+UPLOAD_ROOT="/mount"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-IMAGE_ROOT=os.path.join(BASE_DIR,'media')
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+
 FILEBROWSER_DIRECTORY = ''

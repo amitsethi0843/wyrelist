@@ -1,7 +1,8 @@
 from django.conf.urls import url
-from . import views
-from django.views.generic import TemplateView
+from .views import *
 
-urlpatterns=[
-
+urlpatterns = [
+    url(r'^homePage/$', HomePageIndex.as_view(), name="homePageIndex"),
+    url(r'^addHomePage/$', addHomePage, name="addHomePage"),
+    url(r'^changeHomePageStatus/$',changeStatus,name="changeHomePageStatus")
 ]

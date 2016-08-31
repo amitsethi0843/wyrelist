@@ -20,6 +20,8 @@ INSTALLED_APPS = (
     'common',
     'corsheaders',
     'event',
+    'public',
+    'storages'
 
 )
 

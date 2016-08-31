@@ -1,0 +1,43 @@
+{% extends 'layouts/admin/main.html' %}
+
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px;">
+        {% include '_homePageLeftPanel.html' %}
+        <div class="col-md-9">
+            <table class="table">
+                <thead>
+                <td>Name</td>
+                <td>Landing Image</td>
+                <td>Image Text</td>
+                <td>Enabled</td>
+                <td>Action</td>
+                </thead>
+                <tbody>
+                {% for i in homePage %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.landingImage }}</td>
+                        <td>{{ i.landingImageText }}</td>
+                        <td>
+                            {% if i.enabled %}
+                                Enabled
+                            {% else %}
+                                Disabled
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if i.enabled %}
+                                <a href="{% url 'superUser:public:changeHomePageStatus'%}?id={{ i.id }}&status=DISABLE">Disable</a>
+                            {% else %}
+                                <a href="{% url 'superUser:public:changeHomePageStatus'%}?id={{ i.id }}&status=ENABLE">Enable</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock content %}
+

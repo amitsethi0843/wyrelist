@@ -1,17 +1,7 @@
-from django.forms.models import model_to_dict
 from rest_framework import serializers
 from event.models import Event
 from event.api.serializers import EventRuleSerializer,UserEventSerializer
-
-
-class HomePageSerializer(serializers.Serializer):
-    events="Dsdffsg"
-    # def get_events(self):
-    #     return "wtf"
-        # query=Event.objects.all().values()
-        # serializer=HomePageEventSerializer(query)
-        # return serializer.data
-
+from public.models import HomePage
 
 
 class HomePageEventSerializer(serializers.ModelSerializer):
@@ -22,3 +12,17 @@ class HomePageEventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ('uuid','totalEntries', 'createdBy', 'description',
                   'eventRule','event_images',)
+
+
+class HomePageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=HomePage
+        fields=('landingImage','landingImageText')
+
+    # def get_events(self):
+    #     return "wtf"
+        # query=Event.objects.all().values()
+        # serializer=HomePageEventSerializer(query)
+        # return serializer.data
+
+

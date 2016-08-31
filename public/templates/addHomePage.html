@@ -1,0 +1,67 @@
+{% extends 'layouts/admin/main.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container-fluid" style="margin-top: 50px">
+        {% include '_homePageLeftPanel.html' %}
+        <div class="col-md-9">
+            <form action="{% url 'superUser:public:addHomePage' %}" method="post" enctype="multipart/form-data">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            Home Page Name
+                        </div>
+                        <div class="col-md-6">
+                            {{ homePageForm.name|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            Landing Image
+                        </div>
+                        <div class="col-md-6">
+                            {{ homePageForm.landingImage|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            Landing Image Text
+                        </div>
+                        <div class="col-md-6">
+                            {{ homePageForm.landingImageText|attr:"class:form-control" }}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row text-center bold">
+                            Site Info Boxes
+                        </div>
+                        {% for form in siteInfoFormSet %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        Image
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.image|attr:"class:form-control" }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        Image Text
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.text|attr:"class:form-control" }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-success btn-lg">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

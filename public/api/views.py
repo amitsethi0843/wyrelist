@@ -1,17 +1,20 @@
-from rest_framework.views import APIView
-from .serializers import HomePageSerializer
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.generics import GenericAPIView
+from rest_framework.status import HTTP_200_OK
+from rest_framework.views import APIView
+from .serializers import HomePageSerializer,HomePageEventSerializer
+from public.models import HomePage
+from event.models import Event
 
 
-class GetLandingInstance(APIView):
+class GetLandingInstance(GenericAPIView):
+    def get(self, request, *args, **kwargs):
+            homePage=HomePage.objects.filter(enabled=True).first()
+            events=Event.objects.all().order_by("dateCreated")[:3]
+            homePageSerializer=HomePageSerializer(homePage)
+            eventSerializer=HomePageEventSerializer(events,many=True)
+            response=dict()
+            response['event']=eventSerializer.data
+            response['homePage']=homePageSerializer.data
+            return Response(response,status=HTTP_200_OK)
 
-    def get(self,*args, **kwargs):
-        try:
-            serializer = HomePageSerializer
-            if serializer.is_valid:
-                validated_data=serializer.validated_data
-                return Response(validated_data,status=HTTP_200_OK)
-            return Response(serializer.errors,status=HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            print(e)
