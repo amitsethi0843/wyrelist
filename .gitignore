@@ -10,7 +10,6 @@
 media/
 
 */*.pyc
-*/migrations/*
 
 tabmgnt/local_config.py
 
