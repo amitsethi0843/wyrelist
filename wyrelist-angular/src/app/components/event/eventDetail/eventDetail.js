@@ -29,7 +29,6 @@ var EventDetailComponent = (function () {
             this.commonService.getData().subscribe(function (data) {
                 var nearByLocations = data.nearby_locations;
                 if (nearByLocations) {
-                    console.log(JSON.stringify(nearByLocations));
                     for (var i in nearByLocations) {
                         if (nearByLocations[i].location.type === constants_1.AppConstants._fetch().locationType.METROSTATION[0]) {
                             _this.nearByMetroStations.push(nearByLocations[i]);

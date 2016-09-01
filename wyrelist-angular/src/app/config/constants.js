@@ -1,3 +1,4 @@
+var environment_1 = require("../environment");
 var AppConstants = (function () {
     function AppConstants() {
     }
@@ -5,7 +6,8 @@ var AppConstants = (function () {
         return {
             locationType: this.LocationType,
             time: this.time,
-            date: this.dateInput
+            date: this.dateInput,
+            createS3Url: this.create_s3Url
         };
     };
     AppConstants.LocationType = {
@@ -24,6 +26,16 @@ var AppConstants = (function () {
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
         year: ["2016", "2017", "2018", "2019", "2020"]
+    };
+    AppConstants.create_s3Url = function (url) {
+        if (url) {
+            url = "http://" + environment_1.environment.s3Config.bucketName + ".s3.amazonaws.com" + url;
+            return url;
+        }
+        else {
+            url = "";
+        }
+        return url;
     };
     return AppConstants;
 })();

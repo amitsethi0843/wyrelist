@@ -1,3 +1,4 @@
+import {environment} from "../environment"
 export class AppConstants {
   private static LocationType:any = {
     METROSTATION: ["METROSTATION", "Metro Station"],
@@ -19,12 +20,25 @@ export class AppConstants {
     year: ["2016", "2017", "2018", "2019", "2020"]
   };
 
+   private static create_s3Url=function(url){
+    if(url){
+      url="http://"+environment.s3Config.bucketName+".s3.amazonaws.com"+url;
+      return url
+    }
+    else{
+      url=""
+    }
+    return url;
+  }
+
 
   public static _fetch():any {
     return {
       locationType: this.LocationType,
       time: this.time,
-      date: this.dateInput
+      date: this.dateInput,
+      createS3Url:this.create_s3Url
     }
   }
+
 }

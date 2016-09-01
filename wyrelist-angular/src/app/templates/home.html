@@ -1,12 +1,9 @@
 <section id="landing">
-  <div class="container-fluid">
+  <div class="container-fluid" *ngIf="homePageData">
 
-    <div id="landingImage">
+    <div id="landingImage" [ngStyle]="{'background':'url('+homePageData.homePage.landingImage+') center fixed  no-repeat'}">
     </div>
 
-    <div class="row" >
-
-    </div>
   </div>
 
 

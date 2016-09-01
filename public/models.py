@@ -36,6 +36,11 @@ class HomePage(models.Model):
         homePage.enabled=False
         homePage.save()
 
+    @classmethod
+    def deleteHomePage(cls, id):
+        homePage=cls.objects.get(id=id)
+        homePage.delete()
+
 class SiteInfo(models.Model):
     homePage=models.OneToOneField(HomePage,on_delete=models.CASCADE)
     image=models.ImageField(null=False,upload_to=fileService.get_siteInfo_image_upload_path)

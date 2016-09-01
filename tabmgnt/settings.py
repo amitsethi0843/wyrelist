@@ -18,10 +18,10 @@ from rest import *
 from cors import *
 from s3 import *
 from config import *
-try :
-	from local_config import *
-except ImportError as e:
-	pass
+# try :
+# 	from local_config import *
+# except ImportError as e:
+# 	pass
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

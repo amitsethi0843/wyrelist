@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from tabmgnt.customMixins import SuperuserRequiredMixin
 from django.views.generic import ListView
@@ -8,6 +8,7 @@ from django.forms import formset_factory
 from .forms import *
 from .choices import HomePageStatusType
 import public.service as publicService
+from django.views.generic import DeleteView
 
 
 class HomePageIndex(SuperuserRequiredMixin, ListView):
@@ -30,11 +31,14 @@ def addHomePage(request):
 def changeStatus(request):
     status=request.GET.get("status")
     id=request.GET.get("id")
-    print(status)
-    print(HomePageStatusType.ENABLE)
-
     if status==HomePageStatusType.ENABLE:
         HomePage.enable(id)
     else:
         HomePage.disable(id)
     return redirect(reverse("superUser:public:homePageIndex"))
+
+
+class DeleteHomePage(SuperuserRequiredMixin,DeleteView):
+    model=HomePage
+    success_url=reverse_lazy('superUser:public:homePageIndex')
+

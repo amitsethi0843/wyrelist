@@ -38,7 +38,6 @@ export class EventDetailComponent {
         data=> {
           var nearByLocations = data.nearby_locations;
           if (nearByLocations) {
-            console.log(JSON.stringify(nearByLocations))
             for (var i in nearByLocations) {
               if (nearByLocations[i].location.type === AppConstants._fetch().locationType.METROSTATION[0]) {
                 this.nearByMetroStations.push(nearByLocations[i])

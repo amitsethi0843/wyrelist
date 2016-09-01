@@ -3,13 +3,12 @@ import {Input} from "@angular/core";
 import { REACTIVE_FORM_DIRECTIVES,FormGroup,FormControl,FormBuilder,Validators } from '@angular/forms';
 import {Auth} from "../../services/auth";
 import {CommonService} from "../../services/commonService"
-import {HTTP_PROVIDERS,Http} from "@angular/http";
 import {CustomEventsService} from "../../services/customEvents";
 
 
 @Component({
   templateUrl: '/app/templates/public/login.html',
-  providers: [CommonService, HTTP_PROVIDERS],
+  providers: [CommonService],
   directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class LoginComponent {

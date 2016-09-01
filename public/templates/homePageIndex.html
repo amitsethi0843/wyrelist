@@ -27,10 +27,13 @@
                         </td>
                         <td>
                             {% if i.enabled %}
-                                <a href="{% url 'superUser:public:changeHomePageStatus'%}?id={{ i.id }}&status=DISABLE">Disable</a>
+                                <a class="btn btn-sm btn-warning" href="{% url 'superUser:public:changeHomePageStatus' %}?id={{ i.id }}&status=DISABLE">Disable</a>
                             {% else %}
-                                <a href="{% url 'superUser:public:changeHomePageStatus'%}?id={{ i.id }}&status=ENABLE">Enable</a>
+                                <a class="btn btn-sm btn-success" href="{% url 'superUser:public:changeHomePageStatus' %}?id={{ i.id }}&status=ENABLE">Enable</a>
                             {% endif %}
+                            <form method="POST" action="{% url "superUser:public:removeHomePage" pk=i.id%}">
+                                {% csrf_token %}<input type="submit" class="btn btn-sm btn-danger" value="DELETE">
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}

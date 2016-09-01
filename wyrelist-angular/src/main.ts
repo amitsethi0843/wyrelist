@@ -7,6 +7,8 @@ import {CommonService} from './app/services/commonService'
 import {CustomEventsService} from './app/services/customEvents'
 import {Auth} from './app/services/auth'
 import {provideForms, disableDeprecatedForms} from '@angular/forms';
+import {HTTP_PROVIDERS} from "@angular/http";
+
 
 
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS,Router } from '@angular/router-deprecated';
@@ -18,7 +20,7 @@ if (environment.production) {
 
 bootstrap(
   AppComponent,
-  [ROUTER_PROVIDERS,
+  [ROUTER_PROVIDERS,HTTP_PROVIDERS,
     provide(LocationStrategy, {useClass: PathLocationStrategy}),
     Auth, CommonService,CustomEventsService, disableDeprecatedForms(), provideForms()
   ]

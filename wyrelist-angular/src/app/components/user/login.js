@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var commonService_1 = require("../../services/commonService");
-var http_1 = require("@angular/http");
 var LoginComponent = (function () {
     function LoginComponent(auth, _fb, commonService, customEventsService) {
         this.auth = auth;
@@ -40,7 +39,7 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         core_1.Component({
             templateUrl: '/app/templates/public/login.html',
-            providers: [commonService_1.CommonService, http_1.HTTP_PROVIDERS],
+            providers: [commonService_1.CommonService],
             directives: [forms_1.REACTIVE_FORM_DIRECTIVES]
         })
     ], LoginComponent);

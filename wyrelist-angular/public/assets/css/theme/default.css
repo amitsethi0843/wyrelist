@@ -89,7 +89,6 @@ Website: http://www.seantheme.com/color-admin-v1.9/admin/
 }
 
 #landingImage {
-  background: url("../../img/landing/landing-small.jpg") center fixed  no-repeat ;
   height: 600px;
   background-color: #222222;
   width: 100%;

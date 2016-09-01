@@ -4,5 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl: "http://rest.wyrelist.com/api/"
+  serverUrl: "http://rest.wyrelist.com/api/",
+  s3Config:{
+    bucketName:"wyrelist-prod"
+  }
 };
