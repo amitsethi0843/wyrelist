@@ -2,19 +2,17 @@ from .models import *
 from django import forms
 
 
-def createHomePage(homePageForm, siteInfoFormSet):
+def createHomePage(homePageForm):
     try:
-        homePage=HomePage.saveFromForm(homePageForm)
-        for siteInfoForm in siteInfoFormSet:
-            if siteInfoForm.is_valid():
-                createSiteInfoInstance(siteInfoForm, homePage)
-
+        homePage = HomePage.saveFromForm(homePageForm)
         return homePage
     except Exception as e:
         print(e)
 
-def createSiteInfoInstance(siteInfoForm, homePage):
-    siteInfo = SiteInfo(homePage=homePage,
-                        image=siteInfoForm.cleaned_data['image'],
-                        text=siteInfoForm.cleaned_data['text']).save()
-    return siteInfo
+
+def createSiteInfos(siteInfoFormSet, homePage):
+    for form in siteInfoFormSet:
+        if form.cleaned_data['image']:
+            SiteInfo(homePage=homePage,
+                     image=form.cleaned_data['image'],
+                     text=form.cleaned_data['text']).save()

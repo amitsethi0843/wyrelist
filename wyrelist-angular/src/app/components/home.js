@@ -20,6 +20,7 @@ var HomeComponent = (function () {
         this.commonService.setUrl("public/home/");
         this.commonService.getData().subscribe(function (data) {
             _this.homePageData = data;
+            _this.stringData = JSON.stringify(data);
         }, function (error) { return console.log("error"); }, function () { return console.log("finished"); });
     };
     HomeComponent = __decorate([

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from event.models import Event
 from event.api.serializers import EventRuleSerializer,UserEventSerializer
-from public.models import HomePage
+from public.models import HomePage,SiteInfo
 
 
 class HomePageEventSerializer(serializers.ModelSerializer):
@@ -14,10 +14,18 @@ class HomePageEventSerializer(serializers.ModelSerializer):
                   'eventRule','event_images',)
 
 
+
+class SiteInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=SiteInfo
+        fields=('image','text')
+
 class HomePageSerializer(serializers.ModelSerializer):
+    siteInfos=SiteInfoSerializer(many=True,read_only=True)
     class Meta:
         model=HomePage
-        fields=('landingImage','landingImageText')
+        fields=('landingImage','landingImageText','siteInfos')
+
 
     # def get_events(self):
     #     return "wtf"

@@ -43,7 +43,7 @@ class HomePage(models.Model):
         homePage.delete()
 
 class SiteInfo(models.Model):
-    homePage=models.OneToOneField(HomePage,on_delete=models.CASCADE)
+    homePage=models.ForeignKey(HomePage,on_delete=models.CASCADE,related_name="siteInfos")
     image=models.ImageField(null=False,upload_to=fileService.get_siteInfo_image_upload_path)
     text=models.CharField(null=False,max_length=100)
 

@@ -23,7 +23,10 @@ def addHomePage(request):
     homePageForm = HomePageForm(request.POST, request.FILES)
     siteInfoFormSet = formset_factory(SiteInfoForm, extra=3, max_num=3)
     if homePageForm.is_valid():
-        publicService.createHomePage(homePageForm, siteInfoFormSet)
+        homePage=publicService.createHomePage(homePageForm)
+        formSet=siteInfoFormSet(request.POST,request.FILES)
+        if formSet.is_valid():
+            publicService.createSiteInfos(formSet,homePage)
         return redirect(reverse("superUser:public:homePageIndex"))
     return render(request, "addHomePage.html", {"homePageForm": homePageForm, "siteInfoFormSet": siteInfoFormSet})
 

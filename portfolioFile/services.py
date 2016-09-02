@@ -27,14 +27,11 @@ def get_userImage_upload_path(instance, filename):
     return get_base_url() + "user/" + str(instance.user.uuid) + "/" + "images/" + filename
 
 def get_main_home_upload_directory(instance):
-    print"awadsaaddasad"
     return get_base_url() + "homePage/" + str(instance.id)
 
 def get_main_home_upload_path(instance, filename):
     uploadDirectory=get_main_home_upload_directory(instance)
-    print("-------------"+uploadDirectory)
     return uploadDirectory+ "/main/" + str(filename)
-
 
 def get_siteInfo_image_upload_path(instance, filename):
     return get_base_url() + "homePage/" + str(instance.homePage.id) + "/siteInfo/" + filename

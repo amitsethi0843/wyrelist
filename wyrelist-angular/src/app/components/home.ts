@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   createS3Url:any;
   homePageData:any;
+  stringData:string;
 
   constructor(private customEventsService:CustomEventsService, private commonService:CommonService) {
     this.createS3Url=AppConstants._fetch().createS3Url;
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
     this.commonService.getData().subscribe(
       data=> {
         this.homePageData=data;
+        this.stringData=JSON.stringify(data)
       },
       error=>console.log("error"),
       ()=>console.log("finished")
