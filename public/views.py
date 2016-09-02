@@ -5,7 +5,8 @@ from tabmgnt.customMixins import SuperuserRequiredMixin
 from django.views.generic import ListView
 from .models import HomePage
 from django.forms import formset_factory
-from .forms import *
+from django.views.generic import View
+from .forms import HomePageForm,SiteInfoForm
 from .choices import HomePageStatusType
 import public.service as publicService
 from django.views.generic import DeleteView
@@ -38,7 +39,11 @@ def changeStatus(request):
     return redirect(reverse("superUser:public:homePageIndex"))
 
 
-class DeleteHomePage(SuperuserRequiredMixin,DeleteView):
-    model=HomePage
-    success_url=reverse_lazy('superUser:public:homePageIndex')
+class DeleteHomePage(SuperuserRequiredMixin,View):
+    def post(self,request,pk):
+        HomePage.deleteHomePage(pk)
+        return redirect(reverse('superUser:public:homePageIndex'))
+
+    # model=HomePage
+    # success_url=reverse_lazy('superUser:public:homePageIndex')
 

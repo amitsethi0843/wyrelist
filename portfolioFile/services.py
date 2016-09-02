@@ -1,17 +1,19 @@
 from django.core.files import File
-from portfolioFile.models import *
 import os
-from tabmgnt.settings import ENVIRONMENT_PRODUCTION
 import logging
-from tabmgnt.settings import MEDIA_ROOT, STATIC_ROOT
-from django.core.files.storage import FileSystemStorage
+from tabmgnt.settings import MEDIA_ROOT
+import boto
+from django.conf import settings
+from boto.s3.connection import S3Connection, Bucket, Key
+from boto.s3.key import Key
+
 
 logging.basicConfig()
 log = logging.getLogger(__name__)
 
 
 def get_base_url():
-    if not ENVIRONMENT_PRODUCTION:
+    if not settings.ENVIRONMENT_PRODUCTION:
         return ""
     else:
         return "media/"
@@ -24,14 +26,27 @@ def get_event_upload_path(instance, filename):
 def get_userImage_upload_path(instance, filename):
     return get_base_url() + "user/" + str(instance.user.uuid) + "/" + "images/" + filename
 
+def get_main_home_upload_directory(instance):
+    print"awadsaaddasad"
+    return get_base_url() + "homePage/" + str(instance.id)
 
 def get_main_home_upload_path(instance, filename):
-    return get_base_url() + "homePage/" + str(instance.id) + "/main/" + str(filename)
+    uploadDirectory=get_main_home_upload_directory(instance)
+    print("-------------"+uploadDirectory)
+    return uploadDirectory+ "/main/" + str(filename)
 
 
 def get_siteInfo_image_upload_path(instance, filename):
     return get_base_url() + "homePage/" + str(instance.homePage.id) + "/siteInfo/" + filename
 
+def remove_s3_file(filePath):
+    if settings.ENVIRONMENT_PRODUCTION:
+        conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+        bucket = Bucket(conn,settings.AWS_STORAGE_BUCKET_NAME)
+        for key in bucket.list(prefix=filePath):
+            key.delete()
+        # print("-------------------"+filePath)
+        # bucket.delete_key(filePath)
 
 def createTestFile(content, name):
     print(MEDIA_ROOT + '/test/' + name)
@@ -55,5 +70,7 @@ def createFixedDepositHtmlFile(content, name, fixedDepositScrape):
 
     except Exception as e:
         log.error("===================" + str(e))
+
+
 
 # =========================================================== User

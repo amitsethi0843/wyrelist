@@ -37,8 +37,9 @@ class HomePage(models.Model):
         homePage.save()
 
     @classmethod
-    def deleteHomePage(cls, id):
-        homePage=cls.objects.get(id=id)
+    def deleteHomePage(cls, pk):
+        homePage=cls.objects.get(id=pk)
+        fileService.remove_s3_file(fileService.get_main_home_upload_directory(homePage))  if homePage.landingImage else ""
         homePage.delete()
 
 class SiteInfo(models.Model):
