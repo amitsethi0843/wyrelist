@@ -9,7 +9,6 @@ from django.views.generic import View
 from .forms import HomePageForm,SiteInfoForm
 from .choices import HomePageStatusType
 import public.service as publicService
-from django.views.generic import DeleteView
 
 
 class HomePageIndex(SuperuserRequiredMixin, ListView):
@@ -46,6 +45,9 @@ class DeleteHomePage(SuperuserRequiredMixin,View):
     def post(self,request,pk):
         HomePage.deleteHomePage(pk)
         return redirect(reverse('superUser:public:homePageIndex'))
+
+
+
 
     # model=HomePage
     # success_url=reverse_lazy('superUser:public:homePageIndex')
