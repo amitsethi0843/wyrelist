@@ -55,7 +55,7 @@ class Event(models.Model):
             # print(hasattr(self,'eventImages'))
             eventImage=self.eventimage_set.values()[0]
             # for image in eventImages:
-            eventImage['image']=str(eventImage['image'])
+            eventImage['image']=fileService.convert_toS3_url(eventImage['image'])
             return eventImage
         except Exception as e:
             log.error(e)

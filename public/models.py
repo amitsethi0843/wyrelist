@@ -30,6 +30,9 @@ class HomePage(models.Model):
         homePage.enabled=True
         homePage.save()
 
+    def image_url(self):
+        return self.landingImage.url if self.landingImage else None
+
     @classmethod
     def disable(cls,id):
         homePage=cls.objects.get(id=id)
