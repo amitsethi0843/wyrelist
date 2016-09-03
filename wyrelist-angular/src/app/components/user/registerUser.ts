@@ -24,11 +24,11 @@ export class UserRegistrationComponent {
   showError:boolean;
 
   constructor(private commonService:CommonService, private auth:Auth, private _fb:FormBuilder,private customEventsService:CustomEventsService) {
-    this.customEventsService.changeSidePanelVisibility(true)
+    this.customEventsService.changeSidePanelVisibility(true);
     this.registrationForm=this._fb.group({
       username:['', [Validators.required,CustomValidators.validateEmail]],
-      password:['',[Validators.required,Validators.minLength(AppSettings._fetch().appServer.passwordLength)]],
-      retypePassword:['',[Validators.required,Validators.minLength(AppSettings._fetch().appServer.passwordLength)]]
+      password:['',[Validators.required,Validators.minLength(AppSettings.fetch().appServer.passwordLength)]],
+      retypePassword:['',[Validators.required,Validators.minLength(AppSettings.fetch().appServer.passwordLength)]]
     })
   }
 
@@ -40,7 +40,6 @@ export class UserRegistrationComponent {
       this.commonService.setUrl('user/register/');
       this.commonService.postData().subscribe(
         data=> {
-          console.log("--------------" + JSON.stringify(data));
           if (data.token && data.username) {
             this.token = data.token;
             this.returnedUsername = data.username;

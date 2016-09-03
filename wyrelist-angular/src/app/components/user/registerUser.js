@@ -24,8 +24,8 @@ var UserRegistrationComponent = (function () {
         this.customEventsService.changeSidePanelVisibility(true);
         this.registrationForm = this._fb.group({
             username: ['', [forms_1.Validators.required, validators_1.CustomValidators.validateEmail]],
-            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(appSettings_1.AppSettings._fetch().appServer.passwordLength)]],
-            retypePassword: ['', [forms_1.Validators.required, forms_1.Validators.minLength(appSettings_1.AppSettings._fetch().appServer.passwordLength)]]
+            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(appSettings_1.AppSettings.fetch().appServer.passwordLength)]],
+            retypePassword: ['', [forms_1.Validators.required, forms_1.Validators.minLength(appSettings_1.AppSettings.fetch().appServer.passwordLength)]]
         });
     }
     UserRegistrationComponent.prototype.registerUser = function () {
@@ -34,7 +34,6 @@ var UserRegistrationComponent = (function () {
             this.commonService.setData(this.registrationForm.value);
             this.commonService.setUrl('user/register/');
             this.commonService.postData().subscribe(function (data) {
-                console.log("--------------" + JSON.stringify(data));
                 if (data.token && data.username) {
                     _this.token = data.token;
                     _this.returnedUsername = data.username;

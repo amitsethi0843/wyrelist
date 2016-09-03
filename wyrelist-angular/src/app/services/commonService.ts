@@ -1,33 +1,28 @@
 import {Injectable,EventEmitter} from "@angular/core";
-import {Http,Headers} from "@angular/http"
+import {Http,Headers,RequestMethod,RequestOptions,Request,Response} from "@angular/http"
 import {Auth} from "./auth"
 import {AppSettings} from "../config/appSettings"
 import 'rxjs/add/operator/map'
 import { environment } from '../environment';
 //import {Observable} from "rxjs/Rx";
 //import {Observer} from "rxjs/Observer";
+import {Observable} from 'rxjs/Rx';
+
 
 
 @Injectable()
 export class CommonService {
   url:string;
   data:any;
-
+  requestoptions: RequestOptions;
   constructor(private http:Http, private auth:Auth) {
   }
 
   setHeader(headers:Headers) {
-    var username:string = this.auth.getUserName();
     var token:string = this.auth.getUserToken();
-    //alert(username,token);
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    //username ?  : "";
+    headers.append('Content-Type', 'application/json');
     if (token && token != "") {
-      console.log("token found");
-      //    headers.append('token', token);
-      //    if(username){
-      //        headers.append('username', username)
-      //    }
+      headers.append('Authorization', 'Token '+token);
     }
   }
 
@@ -42,15 +37,49 @@ export class CommonService {
   getData() {
     var headers = new Headers();
     this.setHeader(headers);
-    return this.http.get(this.url)
-      .map(response => response.json());
+    this.requestoptions = new RequestOptions({
+      method: RequestMethod.Get,
+      url: this.url,
+      headers: headers,
+    });
+    return this.http.request(new Request(this.requestoptions))
+      .map((response) => {
+        return response.json();
+      })
+      .catch((error: any) => {
+        if (error.status === 500) {
+          console.log("error------------------500");
+        }
+        else if (error.status === 400) {
+          console.log("error------------------500");
+        }
+        return Observable.throw(new Error(error.status))
+      });
   }
 
   postData() {
     var headers = new Headers();
     this.setHeader(headers);
-    var requestdata = this.convertRequestParams();
-    return this.http.post(this.url, requestdata, {headers: headers}).map((response) => response.json())
+    this.requestoptions = new RequestOptions({
+      method: RequestMethod.Post,
+      url: this.url,
+      headers: headers,
+      body: JSON.stringify(this.data)
+    });
+    //var requestdata = this.convertRequestParams();
+    return this.http.request(new Request(this.requestoptions))
+      .map((response) => {
+        return response.json();
+        //return [{ status: res.status, json: res }]
+      }).catch((error: any) => {
+        if (error.status === 500) {
+          console.log("error------------------500");
+        }
+        else if (error.status === 400) {
+          console.log("error------------------500");
+        }
+        return Observable.throw(new Error(error.status))
+      });
   }
 
 

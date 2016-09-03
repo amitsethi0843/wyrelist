@@ -15,7 +15,7 @@ export class Auth {
     //    });
     //}
 
-    appUrl:string = AppSettings._fetch().appServer.url;
+    appUrl:string = AppSettings.fetch().appServer.url;
     googleMapKey:string = "AIzaSyDuM08PJs00SK8Xyclb0DKaWz0_sMFtqwI";
 
     getGoogleMapKey() {

@@ -17,7 +17,7 @@ var Auth = (function () {
         //        this.dataChange = observer;
         //    });
         //}
-        this.appUrl = appSettings_1.AppSettings._fetch().appServer.url;
+        this.appUrl = appSettings_1.AppSettings.fetch().appServer.url;
         this.googleMapKey = "AIzaSyDuM08PJs00SK8Xyclb0DKaWz0_sMFtqwI";
     }
     Auth.prototype.getGoogleMapKey = function () {

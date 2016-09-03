@@ -9,7 +9,7 @@ export class AppSettings {
     }
   }
 
-  public static _fetch():any {
+  public static fetch():any {
     return {
       appServer: {
         url: this.application.serverUrl,

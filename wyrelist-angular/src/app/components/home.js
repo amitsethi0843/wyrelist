@@ -8,6 +8,7 @@ var core_1 = require("@angular/core");
 var commonService_1 = require("../services/commonService");
 var constants_1 = require("../config/constants");
 var http_1 = require("@angular/http");
+var router_deprecated_1 = require("@angular/router-deprecated");
 var HomeComponent = (function () {
     function HomeComponent(customEventsService, commonService) {
         this.customEventsService = customEventsService;
@@ -20,13 +21,13 @@ var HomeComponent = (function () {
         this.commonService.setUrl("public/home/");
         this.commonService.getData().subscribe(function (data) {
             _this.homePageData = data;
-            _this.stringData = JSON.stringify(data);
         }, function (error) { return console.log("error"); }, function () { return console.log("finished"); });
     };
     HomeComponent = __decorate([
         core_1.Component({
             templateUrl: '/app/templates/home.html',
-            providers: [commonService_1.CommonService, http_1.HTTP_PROVIDERS]
+            providers: [commonService_1.CommonService, http_1.HTTP_PROVIDERS],
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES]
         })
     ], HomeComponent);
     return HomeComponent;

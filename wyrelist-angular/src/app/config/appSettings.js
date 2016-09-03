@@ -1,7 +1,7 @@
 var AppSettings = (function () {
     function AppSettings() {
     }
-    AppSettings._fetch = function () {
+    AppSettings.fetch = function () {
         return {
             appServer: {
                 url: this.application.serverUrl,

@@ -10,19 +10,17 @@ require('rxjs/add/operator/map');
 var environment_1 = require('../environment');
 //import {Observable} from "rxjs/Rx";
 //import {Observer} from "rxjs/Observer";
+var Rx_1 = require('rxjs/Rx');
 var CommonService = (function () {
     function CommonService(http, auth) {
         this.http = http;
         this.auth = auth;
     }
     CommonService.prototype.setHeader = function (headers) {
-        var username = this.auth.getUserName();
         var token = this.auth.getUserToken();
-        //alert(username,token);
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        //username ?  : "";
+        headers.append('Content-Type', 'application/json');
         if (token && token != "") {
-            console.log("token found");
+            headers.append('Authorization', 'Token ' + token);
         }
     };
     CommonService.prototype.setUrl = function (url) {
@@ -34,14 +32,48 @@ var CommonService = (function () {
     CommonService.prototype.getData = function () {
         var headers = new http_1.Headers();
         this.setHeader(headers);
-        return this.http.get(this.url)
-            .map(function (response) { return response.json(); });
+        this.requestoptions = new http_1.RequestOptions({
+            method: http_1.RequestMethod.Get,
+            url: this.url,
+            headers: headers
+        });
+        return this.http.request(new http_1.Request(this.requestoptions))
+            .map(function (response) {
+            return response.json();
+        })
+            .catch(function (error) {
+            if (error.status === 500) {
+                console.log("error------------------500");
+            }
+            else if (error.status === 400) {
+                console.log("error------------------500");
+            }
+            return Rx_1.Observable.throw(new Error(error.status));
+        });
     };
     CommonService.prototype.postData = function () {
         var headers = new http_1.Headers();
         this.setHeader(headers);
-        var requestdata = this.convertRequestParams();
-        return this.http.post(this.url, requestdata, { headers: headers }).map(function (response) { return response.json(); });
+        this.requestoptions = new http_1.RequestOptions({
+            method: http_1.RequestMethod.Post,
+            url: this.url,
+            headers: headers,
+            body: JSON.stringify(this.data)
+        });
+        //var requestdata = this.convertRequestParams();
+        return this.http.request(new http_1.Request(this.requestoptions))
+            .map(function (response) {
+            return response.json();
+            //return [{ status: res.status, json: res }]
+        }).catch(function (error) {
+            if (error.status === 500) {
+                console.log("error------------------500");
+            }
+            else if (error.status === 400) {
+                console.log("error------------------500");
+            }
+            return Rx_1.Observable.throw(new Error(error.status));
+        });
     };
     CommonService.prototype.convertRequestParams = function () {
         var requestParam = "";

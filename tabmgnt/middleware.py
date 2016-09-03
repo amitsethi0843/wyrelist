@@ -11,6 +11,7 @@ class StatsMiddleware(object):
 
     # middleware or filters being used for printing out parameters passed from front end to the public/views
     def process_request(self, request):
+        print "------------"+str(request.body)
         for i in request.GET:
             print ('=====GET', i, request.GET.get(i))
 

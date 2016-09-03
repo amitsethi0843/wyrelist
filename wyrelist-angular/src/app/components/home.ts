@@ -4,10 +4,12 @@ import {CommonService} from "../services/commonService"
 import {OnInit} from "@angular/core"
 import {AppConstants} from "../config/constants"
 import {HTTP_PROVIDERS,Http} from "@angular/http";
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 
 @Component({
   templateUrl: '/app/templates/home.html',
-  providers:[CommonService,HTTP_PROVIDERS]
+  providers:[CommonService,HTTP_PROVIDERS],
+  directives:[ROUTER_DIRECTIVES]
 })
 export class HomeComponent implements OnInit {
 
@@ -25,7 +27,6 @@ export class HomeComponent implements OnInit {
     this.commonService.getData().subscribe(
       data=> {
         this.homePageData=data;
-        this.stringData=JSON.stringify(data)
       },
       error=>console.log("error"),
       ()=>console.log("finished")
