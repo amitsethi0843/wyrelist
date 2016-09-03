@@ -6,7 +6,7 @@ from event.api.filters import EventFilter
 from rest_framework.permissions import IsAuthenticated
 
 class GetEventList(ListAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = EventSerializer
     queryset = Event.objects.all()
     filter_class = EventFilter

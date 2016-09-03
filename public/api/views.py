@@ -10,7 +10,7 @@ from event.models import Event
 class GetLandingInstance(GenericAPIView):
     def get(self, request, *args, **kwargs):
             homePage=HomePage.objects.filter(enabled=True).first()
-            events=Event.objects.all().order_by("dateCreated")[:3]
+            events=Event.objects.all().order_by("-dateCreated")[:3]
             homePageSerializer=HomePageSerializer(homePage)
             eventSerializer=HomePageEventSerializer(events,many=True)
             response=dict()

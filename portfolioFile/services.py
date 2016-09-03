@@ -18,7 +18,7 @@ def get_base_url():
         return "media/"
 
 def convert_toS3_url(url):
-    return "http://"+str(settings.AWS_STORAGE_BUCKET_NAME)+".s3.amazonaws.com/media/"+url if settings.ENVIRONMENT_PRODUCTION else url
+    return "http://"+str(settings.AWS_STORAGE_BUCKET_NAME)+".s3.amazonaws.com/"+url if settings.ENVIRONMENT_PRODUCTION else url
 
 def get_event_upload_path(instance, filename):
     return get_base_url() + "event/" + str(instance.event.uuid) + "/" + str(instance.id) + '-' + filename
